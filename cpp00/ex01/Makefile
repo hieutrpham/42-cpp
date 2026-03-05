@@ -1,7 +1,7 @@
 CC = c++ -std=c++20
 NAME = phonebook
 CFLAGS = -Wall -Werror -Wextra
-SRC = phonebook.cpp
+SRC = main.cpp PhoneBook.cpp Contact.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
@@ -10,7 +10,7 @@ $.o: $.cpp
 	$(CC) $(CFLAGS) -I. -o $@ -c $<
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $<
+	$(CC) -I. -o $@ $^
 
 clean:
 	rm -f $(OBJ)
