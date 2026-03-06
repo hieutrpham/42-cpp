@@ -6,13 +6,14 @@
 /*   By: trupham <trupham@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 16:22:58 by trupham           #+#    #+#             */
-/*   Updated: 2026/03/05 16:36:22 by trupham          ###   ########.fr       */
+/*   Updated: 2026/03/06 10:03:28 by trupham          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include <string>
-#define FIELD_WIDTH 10
+#ifndef CONTACT_H
+#define CONTACT_H
+
+#include "main.hpp"
 
 class Contact {
 private:
@@ -42,3 +43,5 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& os, Contact& c);
+
+#endif // !CONTACT_H

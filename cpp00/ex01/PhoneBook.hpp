@@ -6,20 +6,15 @@
 /*   By: trupham <trupham@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 16:20:55 by trupham           #+#    #+#             */
-/*   Updated: 2026/03/05 16:36:09 by trupham          ###   ########.fr       */
+/*   Updated: 2026/03/06 10:04:01 by trupham          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef PHONEBOOK_H
+#define PHONEBOOK_H
 
-#include <cstdlib>
-#include <iomanip>
-#include <iostream>
-#include <ostream>
-#include <stdexcept>
-#include <string>
+#include "main.hpp"
 #include "Contact.hpp"
-#define CONTACT_CAP 8
 
 class PhoneBook {
 private:
@@ -36,3 +31,5 @@ public:
 	bool searchContact();
 };
 std::ostream& operator<<(std::ostream& os, PhoneBook& p);
+
+#endif // !PHONEBOOK_H
