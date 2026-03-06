@@ -16,7 +16,7 @@
 std::string upperString(std::string str) {
 	std::string ret = str;
 
-	for (int i = 0; i < str.length(); i++) {
+	for (std::string::size_type i = 0; i < str.length(); i++) {
 		ret[i] = (char)std::toupper(str[i]);
 	}
 	return ret;

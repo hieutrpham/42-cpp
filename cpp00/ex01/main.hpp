@@ -19,7 +19,13 @@
 #include <ostream>
 #include <stdexcept>
 #include <string>
+
+#ifdef DEBUG
+#define CONTACT_CAP 2
+#else
 #define CONTACT_CAP 8
+#endif
+
 #define FIELD_WIDTH 10
 
 #endif // !MAIN_H

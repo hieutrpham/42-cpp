@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include "main.hpp"
+
+PhoneBook::PhoneBook() : contact_count(0) {}
+PhoneBook::~PhoneBook() {}
 
 Contact& PhoneBook::getContact(int index) {
 	if (contact_count != 0 && index < CONTACT_CAP)
@@ -62,7 +66,8 @@ bool PhoneBook::addContact() {
 	if (this->contact_count < CONTACT_CAP) {
 		contacts[this->contact_count++] = new_contact;
 	} else if (this->contact_count >= CONTACT_CAP) {
-		contacts[0] = new_contact;
+		contacts[this->oldest_contact % (CONTACT_CAP)] = new_contact;
+		this->oldest_contact++;
 	}
 	std::cout << "Contact added!\n";
 	return true;

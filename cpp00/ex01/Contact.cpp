@@ -13,6 +13,9 @@
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
+Contact::Contact() {}
+Contact::~Contact() {}
+
 std::string Contact::formatStr(std::string str) {
 	std::string ret = str;
 	if (str.length() > FIELD_WIDTH) {

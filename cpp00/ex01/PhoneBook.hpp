@@ -19,11 +19,12 @@
 class PhoneBook {
 private:
 	Contact contacts[CONTACT_CAP];
-	int contact_count;
+	int contact_count = 0;
+	int oldest_contact = 0;
 
 public:
-	PhoneBook() : contact_count(0) {}
-	~PhoneBook() {}
+	PhoneBook();
+	~PhoneBook();
 
 	Contact& getContact(int index);
 	int getContactCount();
