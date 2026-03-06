@@ -10,7 +10,7 @@ $.o: $.cpp
 	$(CC) $(CFLAGS) -I. -o $@ -c $<
 
 $(NAME): $(OBJ)
-	$(CC) -I. -o $@ $^
+	$(CC) $(CFLAGS) -I. -o $@ $^
 
 clean:
 	rm -f $(OBJ)
