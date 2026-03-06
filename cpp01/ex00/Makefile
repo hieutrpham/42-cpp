@@ -23,7 +23,4 @@ fclean: clean
 
 re: fclean all
 
-debug: CC += -DDEBUG
-debug: re
-
 .PHONY: all clean fclean re debug

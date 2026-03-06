@@ -20,7 +20,7 @@ fclean: clean
 
 re: fclean all
 
-debug: CC += -DDEBUG
-debug: re
+debug:
+	$(MAKE) CFLAGS="$(CFLAGS) -DDEBUG" re
 
 .PHONY: all clean fclean re debug
