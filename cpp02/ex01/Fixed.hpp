@@ -3,7 +3,7 @@
 #include <ostream>
 
 class Fixed {
-public:
+private:
 	int num;
 	static const int bit = 8;
 public:

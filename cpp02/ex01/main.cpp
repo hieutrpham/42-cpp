@@ -3,8 +3,8 @@
 
 int main( void ) {
 	Fixed a;
-	a = Fixed( -1234.4321f );
-	Fixed const b( 10 );
+	a = Fixed( 0.4321f );
+	Fixed const b( 0.0000004321f );
 	Fixed const c( 42.42f );
 	Fixed const d( b );
 
