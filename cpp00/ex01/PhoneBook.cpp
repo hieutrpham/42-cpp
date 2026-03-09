@@ -12,6 +12,7 @@
 
 #include "PhoneBook.hpp"
 #include "main.hpp"
+#include <stdexcept>
 
 PhoneBook::PhoneBook() : contact_count(0) {}
 PhoneBook::~PhoneBook() {}
@@ -87,6 +88,8 @@ bool PhoneBook::searchContact() {
 	try {
 		index = std::stoi(input_index);
 	} catch (std::invalid_argument& e) {
+		return false;
+	} catch (std::out_of_range& e) {
 		return false;
 	}
 
