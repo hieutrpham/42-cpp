@@ -3,19 +3,19 @@
 #include <ostream>
 
 ClapTrap::ClapTrap() {
-	std::cout << "default constructed\n";
+	std::cout << "ClapTrap default constructed\n";
 }
 
 ClapTrap::~ClapTrap() {
-	std::cout << "default destructed\n";
+	std::cout << "ClapTrap default destructed\n";
 }
 
 ClapTrap::ClapTrap(std::string name) : name(name) {
-	std::cout << "name constructed\n";
+	std::cout << "Claptrap name constructed\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) {
-	std::cout << "copy constructor\n";
+	std::cout << "Claptrap copy constructor\n";
 	this->name = other.name;
 	this->hp = other.hp;
 	this->ep = other.ep;
@@ -23,7 +23,7 @@ ClapTrap::ClapTrap(const ClapTrap& other) {
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
-	std::cout << "assignment constructor\n";
+	std::cout << "Claptrap assignment constructor\n";
 	if (this != &other) {
 		this->name = other.name;
 		this->hp = other.hp;
