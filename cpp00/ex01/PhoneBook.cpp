@@ -88,8 +88,13 @@ bool PhoneBook::searchContact() {
 	try {
 		index = std::stoi(input_index);
 	} catch (std::invalid_argument& e) {
+		std::cout << e.what() << ": invalid argument\n";
 		return false;
 	} catch (std::out_of_range& e) {
+		std::cout << e.what() << ": out of range\n";
+		return false;
+	} catch (...) {
+		std::cout << "unknown exception\n";
 		return false;
 	}
 
@@ -103,7 +108,7 @@ bool PhoneBook::searchContact() {
 		std::cout << "Secret:       " << this->contacts[index].getSecret() << "\n";
 	}
 	else
-	std::cout << "No available contact\n";
+		std::cout << "No available contact\n";
 	return true;
 }
 
