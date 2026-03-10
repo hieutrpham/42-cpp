@@ -1,6 +1,6 @@
 CC = c++ -std=c++20
 NAME = main
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 
 OBJ = $(SRC:.cpp=.o)

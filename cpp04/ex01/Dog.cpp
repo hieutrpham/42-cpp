@@ -14,17 +14,14 @@ Dog::~Dog(){
 Dog& Dog::operator=(Dog& other){
 	if (this != &other) {
 		this->type = other.type;
-		for (int i = 0; i < IDEAS_CAP; ++i){
-			this->brain[i] = other.brain[i];
-		}
+		delete this->brain;
+		this->brain = new Brain(*other.brain);
 	}
 	return *this;
 }
 Dog::Dog(Dog& other): Animal(other){
 	this->type = other.type;
-	for (int i = 0; i < IDEAS_CAP; ++i){
-		this->brain[i] = other.brain[i];
-	}
+	this->brain = new Brain(*other.brain);
 }
 
 void Dog::makeSound() const {
