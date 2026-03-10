@@ -25,5 +25,7 @@ int main() {
 	WrongAnimal *wc = new WrongCat();
 	wa->makeSound();
 	wc->makeSound();
+	delete wa;
+	delete wc;
 	return 0;
 }
