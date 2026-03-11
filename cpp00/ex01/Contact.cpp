@@ -15,6 +15,17 @@
 
 Contact::Contact() {}
 Contact::~Contact() {}
+Contact::Contact(
+		std::string first_name,
+		std::string last_name,
+		std::string nick_name,
+		std::string phone_num,
+		std::string secret
+	) : first_name(first_name),
+		last_name(last_name),
+		nick_name(nick_name),
+		phone_num(phone_num),
+		secret(secret) {};
 
 std::string Contact::formatStr(std::string str) {
 	std::string ret = str;

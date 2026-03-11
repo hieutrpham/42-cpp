@@ -5,3 +5,5 @@ cpp00/ex00/megaphone
 */*/*.o
 */*/*.vim
 */*/main
+**/*.d
+cpp00/ex01/phonebook
