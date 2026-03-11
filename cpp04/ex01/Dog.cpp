@@ -27,3 +27,7 @@ Dog::Dog(Dog& other): Animal(other){
 void Dog::makeSound() const {
 	std::cout << "Dog sound\n";
 }
+
+Brain *Dog::getBrain() {
+	return this->brain;
+}

@@ -1,7 +1,6 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include <cstdio>
 #include <iostream>
 
 #define NUM_ANIMAL 40
@@ -14,14 +13,25 @@ int main() {
 		else
 			animals[i] = new Cat();
 	}
+	std::cout<< "dog idea: "<< ((Dog*)(animals[0]))->getBrain()->getIdeas()[0] << std::endl;
 	for (int i = 0; i < NUM_ANIMAL; ++i)
 		delete animals[i];
 
-	Animal c1;
-	Cat c2(new Cat());
-	printf("%p\n", &c1);
-	printf("%p\n", &c2);
-	// delete c1;
-	// delete c2;
+	{
+		Cat d;
+		Cat d2(d);
+		Cat d1 = d;
+		d1.getBrain()->getIdeas()[0] = "good idea";
+		std::cout<< d.getBrain()->getIdeas()[0] << std::endl;
+		std::cout<< d1.getBrain()->getIdeas()[0] << std::endl;
+	}
+	{
+		Dog d;
+		Dog d2(d);
+		Dog d1 = d;
+		d1.getBrain()->getIdeas()[0] = "good idea";
+		std::cout<< d.getBrain()->getIdeas()[0] << std::endl;
+		std::cout<< d1.getBrain()->getIdeas()[0] << std::endl;
+	}
 	return 0;
 }

@@ -3,6 +3,9 @@
 
 Brain::Brain() {
 	std::cout<< "Brain constructed\n";
+	for (int i = 0; i < IDEAS_CAP; ++i) {
+		this->ideas[i] = "bad idea";
+	}
 }
 Brain::~Brain() {
 	std::cout<< "Brain destructed\n";
@@ -21,4 +24,8 @@ Brain::Brain(Brain& other) {
 	for (int i = 0; i < IDEAS_CAP; ++i) {
 		this->ideas[i] = other.ideas[i];
 	}
+}
+
+std::string* Brain::getIdeas() {
+	return this->ideas;
 }

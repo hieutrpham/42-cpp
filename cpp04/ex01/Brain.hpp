@@ -10,4 +10,5 @@ public:
 	~Brain();
 	Brain& operator=(Brain& other);
 	Brain(Brain& other);
+	std::string *getIdeas();
 };

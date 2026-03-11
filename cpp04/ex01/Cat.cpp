@@ -27,3 +27,7 @@ Cat::Cat(const Cat& other): Animal(other){
 void Cat::makeSound() const {
 	std::cout << "Cat sound\n";
 }
+
+Brain *Cat::getBrain() {
+	return this->brain;
+}
