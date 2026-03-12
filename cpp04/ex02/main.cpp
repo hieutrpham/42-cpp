@@ -3,19 +3,35 @@
 #include "Cat.hpp"
 #include <iostream>
 
+#define NUM_ANIMAL 40
+
 int main() {
-	Animal* animals[4];
-	animals[0] = new Dog();
-	animals[1] = new Dog();
-	animals[2] = new Cat();
-	animals[3] = new Cat();
-	for (int i = 0; i < 4; ++i)
+	Animal* animals[NUM_ANIMAL];
+	for (int i = 0; i < NUM_ANIMAL; ++i){
+		if (i < NUM_ANIMAL/2)
+			animals[i] = new Dog();
+		else
+			animals[i] = new Cat();
+	}
+	std::cout<< "dog idea: "<< ((Dog*)(animals[0]))->getBrain()->getIdeas()[0] << std::endl;
+	for (int i = 0; i < NUM_ANIMAL; ++i)
 		delete animals[i];
 
-	// Animal *c1 = new Cat();
-	// Animal *c2 = new Dog();
-	// c1 = c2;
-	// delete c1;
-	// delete c2;
+	{
+		Cat d;
+		Cat d2(d);
+		Cat d1 = d;
+		d1.getBrain()->getIdeas()[0] = "good idea";
+		std::cout<< d.getBrain()->getIdeas()[0] << std::endl;
+		std::cout<< d1.getBrain()->getIdeas()[0] << std::endl;
+	}
+	{
+		Dog d;
+		Dog d2(d);
+		Dog d1 = d;
+		d1.getBrain()->getIdeas()[0] = "good idea";
+		std::cout<< d.getBrain()->getIdeas()[0] << std::endl;
+		std::cout<< d1.getBrain()->getIdeas()[0] << std::endl;
+	}
 	return 0;
 }
