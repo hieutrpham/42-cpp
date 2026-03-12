@@ -1,4 +1,5 @@
 #include "Animal.hpp"
+#include "Brain.hpp"
 #include "Cat.hpp"
 
 Cat::Cat(){
@@ -10,22 +11,23 @@ Cat::~Cat(){
 	delete this->brain;
 	std::cout << "cat destructed\n";
 }
-Cat& Cat::operator=(Cat& other){
+Cat& Cat::operator=(const Cat& other){
 	if (this != &other) {
 		this->type = other.type;
-		for (int i = 0; i < IDEAS_CAP; ++i){
-			this->brain[i] = other.brain[i];
-		}
+		delete this->brain;
+		this->brain = new Brain(*other.brain);
 	}
 	return *this;
 }
-Cat::Cat(Cat& other): Animal(other){
+Cat::Cat(const Cat& other): Animal(other){
 	this->type = other.type;
-	for (int i = 0; i < IDEAS_CAP; ++i){
-		this->brain[i] = other.brain[i];
-	}
+	this->brain = new Brain(*other.brain);
 }
 
 void Cat::makeSound() const {
 	std::cout << "Cat sound\n";
+}
+
+Brain *Cat::getBrain() {
+	return this->brain;
 }

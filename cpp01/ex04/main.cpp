@@ -36,7 +36,7 @@ int main(int ac, char** av) {
 		std::string::size_type index = line.find(s1);
 		while (index != std::string::npos) {
 			std::string line1 = line.substr(0, index);
-			std::string line2 = line.substr(index+1);
+			std::string line2 = line.substr(index + s1.length());
 			line = line1 + s2 + line2;
 			index = line.find(s1);
 		}
