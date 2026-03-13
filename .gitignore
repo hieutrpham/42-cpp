@@ -1,11 +1,11 @@
-*/*/a.out
-*/*/compile_commands.json
-cpp00/ex00/megaphone
-*/*/.cache
-*/*/*.o
-*/*/*.vim
-*/*/main
-**/*.d
-cpp00/ex01/phonebook
-**/zombie
-cpp01/ex04/test.replace
+# ignore everything
+*
+
+# whitelist directory
+!*/
+
+# whitelist hpp, cpp
+!*.*pp
+
+# whitelist makefile
+!Makefile
