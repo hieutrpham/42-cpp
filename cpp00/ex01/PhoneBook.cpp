@@ -12,7 +12,6 @@
 
 #include "PhoneBook.hpp"
 #include "main.hpp"
-#include <stdexcept>
 
 PhoneBook::PhoneBook() : contact_count(0) {}
 PhoneBook::~PhoneBook() {}
@@ -29,41 +28,27 @@ int PhoneBook::getContactCount() {
 }
 
 bool PhoneBook::addContact() {
-	std::string first_name;
+	std::string first_name, last_name, nick_name, phone_num, secret;
+
 	std::cout << "First Name: ";
 	std::getline(std::cin, first_name);
-	if (first_name.empty())
-		return false;
 
-	std::string last_name;
 	std::cout << "Last Name: ";
 	std::getline(std::cin, last_name);
-	if (last_name.empty())
-		return false;
 
-	std::string nick_name;
 	std::cout << "Nick Name: ";
 	std::getline(std::cin, nick_name);
-	if (nick_name.empty())
-		return false;
 
-	std::string phone_num;
-	std::cout << "Phone: ";
+	std::cout << "Phone number: ";
 	std::getline(std::cin, phone_num);
-	if (phone_num.empty())
-		return false;
 
-	std::string secret;
-	std::cout << "Secret: ";
+	std::cout << "Darkest Secret: ";
 	std::getline(std::cin, secret);
-	if (secret.empty())
-		return false;
 
 	if (first_name.empty() || last_name.empty() || nick_name.empty() || phone_num.empty() || secret.empty())
 		return false;
 
 	Contact new_contact(first_name, last_name, nick_name, phone_num, secret);
-
 	if (this->contact_count < CONTACT_CAP) {
 		contacts[this->contact_count++] = new_contact;
 	} else if (this->contact_count >= CONTACT_CAP) {
@@ -75,14 +60,24 @@ bool PhoneBook::addContact() {
 }
 
 bool PhoneBook::searchContact() {
+	std::cout
+			<< std::setw(FIELD_WIDTH) << "Index"      << "|"
+			<< std::setw(FIELD_WIDTH) << "First Name" << "|"
+			<< std::setw(FIELD_WIDTH) << "Last Name"  << "|"
+			<< std::setw(FIELD_WIDTH) << "Nick Name"
+	<< std::endl;
 	for (int i = 0; i < this->contact_count; i++) {
 		std::cout << std::setw(FIELD_WIDTH) << i << "|" << this->contacts[i] << std::endl;
 	}
 
 	std::string input_index;
+	if (contact_count == 0) {
+		std::cout << "Phone book is empty\n";
+		return false;
+	}
 	std::cout << "Enter index: ";
 	std::getline(std::cin, input_index);
-	if (input_index.empty())
+	if (input_index.empty() || input_index.length() != 1)
 		return false;
 	int index;
 	try {
@@ -101,11 +96,11 @@ bool PhoneBook::searchContact() {
 	if (index < 0 || index >= CONTACT_CAP)
 		return false;
 	if (contact_count != 0 && !this->contacts[index].getFirstName().empty()) {
-		std::cout << "First Name:   " << this->contacts[index].getFirstName() << "\n";
-		std::cout << "Last Name:    " << this->contacts[index].getLastName() << "\n";
-		std::cout << "Nick Name:    " << this->contacts[index].getNickName() << "\n";
-		std::cout << "Phone number: " << this->contacts[index].getPhone() << "\n";
-		std::cout << "Secret:       " << this->contacts[index].getSecret() << "\n";
+		std::cout << "First Name:     " << this->contacts[index].getFirstName() << "\n";
+		std::cout << "Last Name:      " << this->contacts[index].getLastName() << "\n";
+		std::cout << "Nick Name:      " << this->contacts[index].getNickName() << "\n";
+		std::cout << "Phone number:   " << this->contacts[index].getPhone() << "\n";
+		std::cout << "Darkest Secret: " << this->contacts[index].getSecret() << "\n";
 	}
 	else
 		std::cout << "No available contact\n";
@@ -118,4 +113,3 @@ std::ostream& operator<<(std::ostream& os, PhoneBook& p) {
 	}
 	return os;
 }
-
