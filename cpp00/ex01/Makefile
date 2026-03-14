@@ -4,20 +4,25 @@ CFLAGS = -Wall -Werror -Wextra
 DFLAGS = -MMD -MP
 SRC = main.cpp PhoneBook.cpp Contact.cpp
 OBJ = $(SRC:.cpp=.o)
-DEP = $(SRC:.cpp=.d)
+OBJ_PATH = obj/
+OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
+DEP = $(addprefix $(OBJ_PATH), $(SRC:.cpp=.d))
 
-all: $(NAME)
+all: $(OBJ_PATH) $(NAME)
 
-%.o: %.cpp
+$(OBJ_PATH)%.o: %.cpp
 	$(CC) $(CFLAGS) $(DFLAGS) -o $@ -c $<
 
-$(NAME): $(OBJ)
+$(OBJ_PATH):
+	mkdir -p $(OBJ_PATH)
+
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 -include $(DEP)
 
 clean:
-	rm -f $(OBJ) $(DEP)
+	rm -f $(OBJS) $(DEP)
 
 fclean: clean
 	rm -f $(NAME)

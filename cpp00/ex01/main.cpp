@@ -33,7 +33,7 @@ int main() {
 		std::getline(std::cin, buffer);
 		if (upperString(buffer) == "EXIT")
 			exit(0);
-		else if (upperString(buffer) == "ADD")
+		else if (upperString(buffer) == "ADD" || upperString(buffer) == "A")
 		{
 			if (!p.addContact()) {
 				std::cout << "Failed to add contact\n";
@@ -41,7 +41,7 @@ int main() {
 			}
 			std::cout << p << std::endl;
 		}
-		else if (upperString(buffer) == "SEARCH") {
+		else if (upperString(buffer) == "SEARCH" || upperString(buffer) == "S") {
 			if (!p.searchContact()) {
 				std::cout << "Invalid contact\n";
 				continue;
@@ -50,5 +50,4 @@ int main() {
 		else
 			continue;
 	}
-	return 0;
 }
