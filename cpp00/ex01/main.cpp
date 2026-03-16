@@ -28,11 +28,11 @@ int main() {
 
 	while (true) {
 		if (std::cin.eof())
-			exit(0);
+			return 0;
 		std::cout << "Please enter command (ADD, SEARCH, EXIT): ";
 		std::getline(std::cin, buffer);
 		if (upperString(buffer) == "EXIT")
-			exit(0);
+			return 0;
 		else if (upperString(buffer) == "ADD" || upperString(buffer) == "A")
 		{
 			if (!p.addContact()) {
