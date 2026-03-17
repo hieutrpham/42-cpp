@@ -1,0 +1,15 @@
+#pragma once
+
+#include <string>
+#include <iostream>
+
+class Harl {
+private:
+	void DEBUG(void);
+	void INFO(void);
+	void WARNING(void);
+	void ERROR(void);
+public:
+	typedef void (Harl::*MemberFunc)(void);
+	void complain(std::string level);
+};
