@@ -1,14 +1,14 @@
 CC = c++ -std=c++20
 NAME = main
 CFLAGS = -Wall -Werror -Wextra
-DFLAGS = -MMP -MD
+DFLAGS = -MMD -MP
 SRC = HumanA.cpp \
 	  HumanB.cpp \
 	  main.cpp \
 	  Weapon.cpp \
 
 OBJ = $(SRC:.cpp=.o)
-DEP = $(SRC:.cpp=.o)
+DEP = $(SRC:.cpp=.d)
 
 all: $(NAME)
 
