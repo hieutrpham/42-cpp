@@ -19,8 +19,9 @@ Fixed::~Fixed() {
 	// std::cout << "destructor called\n";
 }
 
-Fixed::Fixed(const Fixed &copy) : num(copy.num){
+Fixed::Fixed(const Fixed &copy) {
 	// std::cout << "copy constructor called\n";
+	*this = copy;
 }
 
 Fixed& Fixed::operator=(const Fixed& other) {
@@ -41,7 +42,7 @@ void Fixed::setRawBits(int const raw) {
 }
 
 float Fixed::toFloat(void) const {
-	return (float)this->num / (1 << this->bit);
+	return (float)this->num / (float)(1 << this->bit);
 }
 
 int Fixed::toInt(void) const {
@@ -71,19 +72,29 @@ bool Fixed::operator<(const Fixed& other) {
 }
 
 Fixed Fixed::operator+(const Fixed& other) {
-	return Fixed(this->toFloat() + other.toFloat());
+	Fixed ret;
+	ret.setRawBits(this->num + other.num);
+	return ret;
 }
 
 Fixed Fixed::operator-(const Fixed& other) {
-	return Fixed(this->toFloat() - other.toFloat());
+	Fixed ret;
+	ret.setRawBits(this->num - other.num);
+	return ret;
 }
 
 Fixed Fixed::operator*(const Fixed& other) {
-	return Fixed(this->toFloat() * other.toFloat());
+	Fixed ret;
+	auto temp = (this->num * other.num) >> this->bit;
+	ret.setRawBits(temp);
+	return ret;
 }
 
 Fixed Fixed::operator/(const Fixed& other) {
-	return Fixed(this->toFloat() / other.toFloat());
+	Fixed ret;
+	auto temp = (this->num << this->bit) / other.num;
+	ret.setRawBits(temp);
+	return ret;
 }
 
 Fixed& Fixed::operator--() {

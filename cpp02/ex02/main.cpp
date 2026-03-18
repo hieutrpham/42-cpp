@@ -2,8 +2,8 @@
 #include <iostream>
 
 int main( void ) {
-	Fixed a;
-	Fixed b( Fixed( 5.05f ) * Fixed( 2 ) );
+	Fixed a(10.5f);
+	Fixed b(5.4f);
 	std::cout << a + b << std::endl;
 	std::cout << a - b << std::endl;
 	std::cout << a * b << std::endl;
