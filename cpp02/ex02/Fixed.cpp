@@ -4,24 +4,23 @@
 #include <ostream>
 
 Fixed::Fixed() : num(0) {
-	// std::cout << "default constructor called\n";
+	std::cout << "default constructor called\n";
 }
 
 Fixed::Fixed(int param) : num(param << bit) {
-	// std::cout << "int constructor called\n";
+	std::cout << "int constructor called\n";
 }
 
 Fixed::Fixed(float param) : num(std::roundf(param * (1 << bit))) {
-	// std::cout << "float constructor called\n";
+	std::cout << "float constructor called\n";
 }
 
 Fixed::~Fixed() {
-	// std::cout << "destructor called\n";
+	std::cout << "destructor called\n";
 }
 
-Fixed::Fixed(const Fixed &copy) {
-	// std::cout << "copy constructor called\n";
-	*this = copy;
+Fixed::Fixed(const Fixed &copy) : num(copy.num) {
+	std::cout << "copy constructor called\n";
 }
 
 Fixed& Fixed::operator=(const Fixed& other) {
@@ -32,12 +31,12 @@ Fixed& Fixed::operator=(const Fixed& other) {
 }
 
 int Fixed::getRawBits(void) const {
-	// std::cout << "getRawbits member function called\n";
+	std::cout << "getRawbits member function called\n";
 	return this->num;
 }
 
 void Fixed::setRawBits(int const raw) {
-	// std::cout << "setRawbits member function called\n";
+	std::cout << "setRawbits member function called\n";
 	this->num = raw;
 }
 

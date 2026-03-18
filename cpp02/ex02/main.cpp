@@ -4,11 +4,13 @@
 int main( void ) {
 	Fixed a(10.5f);
 	Fixed b(5.4f);
-	std::cout << a + b << std::endl;
-	std::cout << a - b << std::endl;
-	std::cout << a * b << std::endl;
-	std::cout << a / b << std::endl;
-	std::cout << b / a << std::endl;
+	std::cout << "a: " << a << std::endl;
+	std::cout << "b: " << b << std::endl;
+	std::cout << "a + b: " << a + b << std::endl;
+	std::cout << "a - b: " << a - b << std::endl;
+	std::cout << "a * b: " << a * b << std::endl;
+	std::cout << "a / b: " << a / b << std::endl;
+	std::cout << "b / a: " << b / a << std::endl;
 	std::cout << a << std::endl;
 	std::cout << --a << std::endl;
 	std::cout << a << std::endl;
