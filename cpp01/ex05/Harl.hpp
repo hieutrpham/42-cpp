@@ -9,7 +9,7 @@ private:
 	void INFO(void);
 	void WARNING(void);
 	void ERROR(void);
-public:
 	typedef void (Harl::*MemberFunc)(void);
+public:
 	void complain(std::string level);
 };

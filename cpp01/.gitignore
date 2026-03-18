@@ -9,3 +9,6 @@
 
 # whitelist makefile
 !Makefile
+
+# others
+!.gitignore
