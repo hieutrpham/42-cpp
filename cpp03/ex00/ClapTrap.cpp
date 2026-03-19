@@ -1,6 +1,5 @@
 #include "ClapTrap.hpp"
 #include <iostream>
-#include <ostream>
 
 ClapTrap::ClapTrap() {
 	std::cout << "default constructed\n";
@@ -11,7 +10,7 @@ ClapTrap::~ClapTrap() {
 }
 
 ClapTrap::ClapTrap(std::string name) : name(name) {
-	std::cout << "name destructed\n";
+	std::cout << name << " constructed\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) {
@@ -34,22 +33,28 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
 }
 
 void ClapTrap::attack(const std::string& target) {
-	if (this->hp <= 0 || this->ep <= 0)
+	if (this->hp <= 0 || this->ep <= 0) {
+		std::cout << "nah\n";
 		return;
+	}
 	std::cout << this->name << " attacks " << target << ", causing " << this->dmg << " points of damage!" << std::endl;
 	this->ep--;
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-	if (this->hp <= 0)
+	if (this->hp <= 0) {
+		std::cout << "dead\n";
 		return;
+	}
 	std::cout << this->name << " takes " << amount << " points of damage!" << std::endl;
 	this->hp -= amount;
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-	if (this->hp <= 0 || this->ep <= 0)
+	if (this->hp <= 0 || this->ep <= 0) {
+		std::cout << "nah\n";
 		return;
+	}
 	std::cout << this->name << " repairs " << amount << " points of hp!" << std::endl;
 	this->ep--;
 	this->hp += amount;
