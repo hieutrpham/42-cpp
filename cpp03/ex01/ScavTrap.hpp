@@ -1,7 +1,7 @@
 #pragma once
 #include "ClapTrap.hpp"
 
-class ScavTrap : ClapTrap {
+class ScavTrap : public ClapTrap {
 public:
 	ScavTrap();
 	ScavTrap(std::string name);
