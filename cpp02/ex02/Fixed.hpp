@@ -17,12 +17,12 @@ public:
 	void setRawBits(int const raw);
 	float toFloat(void) const;
 	int toInt(void) const;
-	bool operator>(const Fixed& other);
-	bool operator<(const Fixed& other);
-	bool operator>=(const Fixed& other);
-	bool operator<=(const Fixed& other);
-	bool operator==(const Fixed& other);
-	bool operator!=(const Fixed& other);
+	bool operator>(const Fixed& other) const;
+	bool operator<(const Fixed& other) const;
+	bool operator>=(const Fixed& other) const;
+	bool operator<=(const Fixed& other) const;
+	bool operator==(const Fixed& other) const;
+	bool operator!=(const Fixed& other) const;
 	Fixed operator+(const Fixed& other);
 	Fixed operator-(const Fixed& other);
 	Fixed operator*(const Fixed& other);
@@ -31,9 +31,9 @@ public:
 	Fixed operator--(int);
 	Fixed& operator++();
 	Fixed operator++(int);
-	static const Fixed& min(Fixed& one, Fixed& two);
+	static Fixed& min(Fixed& one, Fixed& two);
 	static const Fixed& min(const Fixed& one, const Fixed& two);
-	static const Fixed& max(Fixed& one, Fixed& two);
+	static Fixed& max(Fixed& one, Fixed& two);
 	static const Fixed& max(const Fixed& one, const Fixed& two);
 };
 

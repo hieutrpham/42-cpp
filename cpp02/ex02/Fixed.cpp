@@ -48,25 +48,25 @@ int Fixed::toInt(void) const {
 	return this->num >> this->bit;
 }
 
-bool Fixed::operator!=(const Fixed& other) {
+bool Fixed::operator!=(const Fixed& other) const {
 	return this->num != other.num;
 }
-bool Fixed::operator==(const Fixed& other) {
+bool Fixed::operator==(const Fixed& other) const {
 	return this->num == other.num;
 }
 
-bool Fixed::operator>=(const Fixed& other) {
+bool Fixed::operator>=(const Fixed& other) const {
 	return this->num >= other.num;
 }
 
-bool Fixed::operator<=(const Fixed& other) {
+bool Fixed::operator<=(const Fixed& other) const {
 	return this->num <= other.num;
 }
-bool Fixed::operator>(const Fixed& other) {
+bool Fixed::operator>(const Fixed& other) const {
 	return this->num > other.num;
 }
 
-bool Fixed::operator<(const Fixed& other) {
+bool Fixed::operator<(const Fixed& other) const {
 	return this->num < other.num;
 }
 
@@ -117,7 +117,7 @@ Fixed Fixed::operator++(int) {
 	return temp;
 }
 
-const Fixed& Fixed::min(Fixed& one, Fixed& two) {
+Fixed& Fixed::min(Fixed& one, Fixed& two) {
 	if (one <= two)
 		return one;
 	else
@@ -131,7 +131,7 @@ const Fixed& Fixed::min(const Fixed& one, const Fixed& two) {
 		return two;
 }
 
-const Fixed& Fixed::max(Fixed& one, Fixed& two) {
+Fixed& Fixed::max(Fixed& one, Fixed& two) {
 	if (one <= two)
 		return two;
 	else
