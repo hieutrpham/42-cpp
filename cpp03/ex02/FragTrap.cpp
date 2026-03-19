@@ -30,5 +30,9 @@ FragTrap& FragTrap::operator=(const FragTrap& other) {
 }
 
 void FragTrap::highFivesGuys(void) {
+	if (this->hp <= 0 || this->ep <= 0) {
+		std::cout << "nah\n";
+		return;
+	}
 	std::cout << this->name << " high five\n";
 }
