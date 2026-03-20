@@ -8,7 +8,7 @@ ScavTrap::ScavTrap() {
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name){
 	std::cout << "ScavTrap name constructed\n";
-	this->dmg = 100;
+	this->hp = 100;
 	this->ep = 50;
 	this->dmg = 20;
 }
