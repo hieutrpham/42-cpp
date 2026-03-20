@@ -46,12 +46,21 @@ void ClapTrap::takeDamage(unsigned int amount) {
 		std::cout << "dead\n";
 		return;
 	}
+	if ((int)amount < 0) {
+		std::cout << "nah\n";
+		return;
+	}
+
 	std::cout << this->name << " takes " << amount << " points of damage!" << std::endl;
 	this->hp -= amount;
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
 	if (this->hp <= 0 || this->ep <= 0) {
+		std::cout << "nah\n";
+		return;
+	}
+	if ((int)amount < 0) {
 		std::cout << "nah\n";
 		return;
 	}
