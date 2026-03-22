@@ -8,7 +8,7 @@ FragTrap::FragTrap() {
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name){
 	std::cout << "FragTrap name constructed\n";
-	this->dmg = 100;
+	this->hp = 100;
 	this->ep = 100;
 	this->dmg = 30;
 }
