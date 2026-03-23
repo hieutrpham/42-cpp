@@ -7,25 +7,19 @@
 #include <memory>
 
 int main() {
-	// std::unique_ptr<Animal> a = std::make_unique<Animal>();
-	const Animal *a = new Animal();
+	std::unique_ptr<Animal> a = std::make_unique<Animal>();
+	std::unique_ptr<Animal> d = std::make_unique<Dog>();
+	std::unique_ptr<Animal> c = std::make_unique<Cat>();
 	
-	const Animal *d = new Dog();
-	const Animal *c = new Cat();
 	std::cout << a->getType() << std::endl;
 	std::cout << d->getType() << std::endl;
 	std::cout << c->getType() << std::endl;
 	a->makeSound();
 	d->makeSound();
 	c->makeSound();
-	delete a;
-	delete d;
-	delete c;
-	WrongAnimal *wa = new WrongAnimal();
-	WrongAnimal *wc = new WrongCat();
+	std::unique_ptr<WrongAnimal> wa = std::make_unique<WrongAnimal>();
+	std::unique_ptr<WrongAnimal> wc = std::make_unique<WrongCat>();
 	wa->makeSound();
 	wc->makeSound();
-	delete wa;
-	delete wc;
 	return 0;
 }
