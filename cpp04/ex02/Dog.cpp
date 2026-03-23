@@ -13,9 +13,9 @@ Dog::~Dog(){
 }
 Dog& Dog::operator=(Dog& other){
 	if (this != &other) {
-		this->type = other.type;
-		delete this->brain;
+		Animal::operator=(other);
 		this->brain = new Brain(*other.brain);
+		delete this->brain;
 	}
 	return *this;
 }
