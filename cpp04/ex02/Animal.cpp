@@ -13,8 +13,8 @@ Animal& Animal::operator=(Animal& other){
 	}
 	return *this;
 }
-Animal::Animal(const Animal& other){
-	this->type = other.type;
+Animal::Animal(const Animal& other) : type(other.type){
+	std::cout << "animal copy constructor\n";
 }
 
 void Animal::makeSound() const {
