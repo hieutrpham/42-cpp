@@ -1,5 +1,6 @@
 #include "Animal.hpp"
 #include "Brain.hpp"
+#include <iostream>
 #include "Cat.hpp"
 
 Cat::Cat(){
@@ -20,6 +21,7 @@ Cat& Cat::operator=(const Cat& other){
 	return *this;
 }
 Cat::Cat(const Cat& other): Animal(other){
+	std::cout << "cat copy constructor\n";
 	this->type = other.type;
 	this->brain = new Brain(*other.brain);
 }

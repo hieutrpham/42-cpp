@@ -21,6 +21,7 @@ Brain& Brain::operator=(Brain& other) {
 }
 
 Brain::Brain(Brain& other) {
+	std::cout << "brain copy constructor\n";
 	for (int i = 0; i < IDEAS_CAP; ++i) {
 		this->ideas[i] = other.ideas[i];
 	}
