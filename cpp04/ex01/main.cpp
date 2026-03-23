@@ -1,9 +1,11 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include <cassert>
 #include <iostream>
 
-#define NUM_ANIMAL 40
+#define NUM_ANIMAL 2
+static_assert(NUM_ANIMAL > 0, "ERR");
 
 int main() {
 	Animal* animals[NUM_ANIMAL];
@@ -21,6 +23,9 @@ int main() {
 		Cat d;
 		Cat d2(d);
 		Cat d1 = d;
+		std::cout << d.getType() << std::endl;
+		std::cout << d2.getType() << std::endl;
+		std::cout << d1.getType() << std::endl;
 		d1.getBrain()->getIdeas()[0] = "good idea";
 		std::cout<< d.getBrain()->getIdeas()[0] << std::endl;
 		std::cout<< d1.getBrain()->getIdeas()[0] << std::endl;
@@ -29,6 +34,9 @@ int main() {
 		Dog d;
 		Dog d2(d);
 		Dog d1 = d;
+		std::cout << d.getType() << std::endl;
+		std::cout << d2.getType() << std::endl;
+		std::cout << d1.getType() << std::endl;
 		d1.getBrain()->getIdeas()[0] = "good idea";
 		std::cout<< d.getBrain()->getIdeas()[0] << std::endl;
 		std::cout<< d1.getBrain()->getIdeas()[0] << std::endl;

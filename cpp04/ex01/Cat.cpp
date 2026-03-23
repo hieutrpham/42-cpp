@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Cat.hpp"
 
-Cat::Cat(){
+Cat::Cat(): Animal() {
 	this->brain = new Brain();
 	this->type = "cat type";
 	std::cout << "cat constructed\n";
@@ -22,7 +22,6 @@ Cat& Cat::operator=(Cat& other){
 }
 Cat::Cat(const Cat& other): Animal(other){
 	std::cout << "cat copy constructor\n";
-	this->type = other.type;
 	this->brain = new Brain(*other.brain);
 }
 
