@@ -1,7 +1,8 @@
 #include "Animal.hpp"
+#include <iostream>
 #include "Cat.hpp"
 
-Cat::Cat(){
+Cat::Cat() : Animal() {
 	this->type = "cat type";
 	std::cout << "cat constructed\n";
 }
@@ -10,12 +11,12 @@ Cat::~Cat(){
 }
 Cat& Cat::operator=(Cat& other){
 	if (this != &other) {
-		this->type = other.type;
+		Animal::operator=(other);
 	}
 	return *this;
 }
 Cat::Cat(Cat& other): Animal(other){
-	this->type = other.type;
+	std::cout << "cat copy constructor\n";
 }
 
 void Cat::makeSound() const {

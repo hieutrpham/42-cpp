@@ -1,4 +1,5 @@
 #include "Animal.hpp"
+#include <iostream>
 #include "Dog.hpp"
 
 Dog::Dog() : Animal(){
@@ -10,12 +11,12 @@ Dog::~Dog(){
 }
 Dog& Dog::operator=(Dog& other){
 	if (this != &other) {
-		this->type = other.type;
+		Animal::operator=(other);
 	}
 	return *this;
 }
 Dog::Dog(Dog& other): Animal(other){
-	this->type = other.type;
+	std::cout << "dog copy constructor\n";
 }
 
 void Dog::makeSound() const {
