@@ -26,9 +26,11 @@ int main() {
 		std::cout << d.getType() << std::endl;
 		std::cout << d2.getType() << std::endl;
 		std::cout << d1.getType() << std::endl;
-		d1.getBrain()->getIdeas()[0] = "good idea";
+		d1.getBrain()->getIdeas()[0] = "d1 has good idea";
+		d2.getBrain()->getIdeas()[0] = "d2 has good idea";
 		std::cout<< d.getBrain()->getIdeas()[0] << std::endl;
 		std::cout<< d1.getBrain()->getIdeas()[0] << std::endl;
+		std::cout<< d2.getBrain()->getIdeas()[0] << std::endl;
 	}
 	{
 		Dog d;
@@ -37,9 +39,11 @@ int main() {
 		std::cout << d.getType() << std::endl;
 		std::cout << d2.getType() << std::endl;
 		std::cout << d1.getType() << std::endl;
-		d1.getBrain()->getIdeas()[0] = "good idea";
+		d1.getBrain()->getIdeas()[0] = "d1 has good idea";
+		d2.getBrain()->getIdeas()[0] = "d2 has good idea";
 		std::cout<< d.getBrain()->getIdeas()[0] << std::endl;
 		std::cout<< d1.getBrain()->getIdeas()[0] << std::endl;
+		std::cout<< d2.getBrain()->getIdeas()[0] << std::endl;
 	}
 	return 0;
 }
