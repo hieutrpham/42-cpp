@@ -7,5 +7,5 @@ public:
 	~WrongCat();
 	WrongCat& operator=(WrongCat& other);
 	WrongCat(WrongCat& other);
-	void makeSound() const override;
+	void makeSound() const;
 };

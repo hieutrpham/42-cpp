@@ -10,6 +10,6 @@ public:
 	virtual ~WrongAnimal();
 	WrongAnimal& operator=(WrongAnimal& other);
 	WrongAnimal(WrongAnimal& other);
-	virtual void makeSound() const;
+	void makeSound() const;
 	std::string getType() const;
 };
