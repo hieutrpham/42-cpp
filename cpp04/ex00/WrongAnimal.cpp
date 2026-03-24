@@ -14,6 +14,7 @@ WrongAnimal& WrongAnimal::operator=(WrongAnimal& other){
 	return *this;
 }
 WrongAnimal::WrongAnimal(WrongAnimal& other){
+	std::cout << "wrong animal copy constructor\n";
 	this->type = other.type;
 }
 

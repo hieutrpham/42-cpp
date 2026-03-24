@@ -1,4 +1,5 @@
 #include "WrongAnimal.hpp"
+#include <iostream>
 #include "WrongCat.hpp"
 
 WrongCat::WrongCat(){
@@ -10,12 +11,12 @@ WrongCat::~WrongCat(){
 }
 WrongCat& WrongCat::operator=(WrongCat& other){
 	if (this != &other) {
-		this->type = other.type;
+		WrongCat::operator=(other);
 	}
 	return *this;
 }
 WrongCat::WrongCat(WrongCat& other): WrongAnimal(other){
-	this->type = other.type;
+	std::cout << "wrong cat copy constructor\n";
 }
 
 void WrongCat::makeSound() const {
