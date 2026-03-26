@@ -16,6 +16,8 @@ $(OBJ_PATH)%.o: %.cpp
 $(OBJ_PATH):
 	mkdir -p $(OBJ_PATH)
 
+.SECONDARY: $(OBJS)
+
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
