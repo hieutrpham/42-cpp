@@ -20,9 +20,11 @@ int main() {
 		delete animals[i];
 
 	{
-		Cat d;
+		Cat d, c;
 		Cat d2(d);
 		Cat d1 = d;
+		c = d;
+		std::cout << c.getType() << std::endl;
 		std::cout << d.getType() << std::endl;
 		std::cout << d2.getType() << std::endl;
 		std::cout << d1.getType() << std::endl;
@@ -33,10 +35,12 @@ int main() {
 		std::cout<< d2.getBrain()->getIdeas()[0] << std::endl;
 	}
 	{
-		Dog d;
+		Dog d, c;
 		Dog d2(d);
 		Dog d1 = d;
+		c = d;
 		std::cout << d.getType() << std::endl;
+		std::cout << c.getType() << std::endl;
 		std::cout << d2.getType() << std::endl;
 		std::cout << d1.getType() << std::endl;
 		d1.getBrain()->getIdeas()[0] = "d1 has good idea";

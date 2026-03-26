@@ -1,9 +1,11 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include <cassert>
 #include <iostream>
 
-#define NUM_ANIMAL 40
+#define NUM_ANIMAL 2
+static_assert(NUM_ANIMAL > 0, "ERR");
 
 int main() {
 	Animal* animals[NUM_ANIMAL];
@@ -18,20 +20,34 @@ int main() {
 		delete animals[i];
 
 	{
-		Cat d;
+		Cat d, c;
 		Cat d2(d);
 		Cat d1 = d;
-		d1.getBrain()->getIdeas()[0] = "good idea";
+		c = d;
+		std::cout << c.getType() << std::endl;
+		std::cout << d.getType() << std::endl;
+		std::cout << d2.getType() << std::endl;
+		std::cout << d1.getType() << std::endl;
+		d1.getBrain()->getIdeas()[0] = "d1 has good idea";
+		d2.getBrain()->getIdeas()[0] = "d2 has good idea";
 		std::cout<< d.getBrain()->getIdeas()[0] << std::endl;
 		std::cout<< d1.getBrain()->getIdeas()[0] << std::endl;
+		std::cout<< d2.getBrain()->getIdeas()[0] << std::endl;
 	}
 	{
-		Dog d;
+		Dog d, c;
 		Dog d2(d);
 		Dog d1 = d;
-		d1.getBrain()->getIdeas()[0] = "good idea";
+		c = d;
+		std::cout << d.getType() << std::endl;
+		std::cout << c.getType() << std::endl;
+		std::cout << d2.getType() << std::endl;
+		std::cout << d1.getType() << std::endl;
+		d1.getBrain()->getIdeas()[0] = "d1 has good idea";
+		d2.getBrain()->getIdeas()[0] = "d2 has good idea";
 		std::cout<< d.getBrain()->getIdeas()[0] << std::endl;
 		std::cout<< d1.getBrain()->getIdeas()[0] << std::endl;
+		std::cout<< d2.getBrain()->getIdeas()[0] << std::endl;
 	}
 	return 0;
 }

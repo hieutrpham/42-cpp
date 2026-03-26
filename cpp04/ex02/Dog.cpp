@@ -1,5 +1,6 @@
 #include "Animal.hpp"
 #include "Brain.hpp"
+#include <iostream>
 #include "Dog.hpp"
 
 Dog::Dog() : Animal(){
@@ -12,13 +13,15 @@ Dog::~Dog(){
 	std::cout << "dog destructed\n";
 }
 Dog& Dog::operator=(Dog& other){
+	std::cout << "dog asssignment operator\n";
 	if (this != &other) {
 		Animal::operator=(other);
-		this->brain = new Brain(*other.brain);
 		delete this->brain;
+		this->brain = new Brain(*other.brain);
 	}
 	return *this;
 }
+
 Dog::Dog(Dog& other): Animal(other){
 	std::cout << "dog copy constructor\n";
 	this->brain = new Brain(*other.brain);

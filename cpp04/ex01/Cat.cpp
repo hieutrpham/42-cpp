@@ -13,10 +13,11 @@ Cat::~Cat(){
 	std::cout << "cat destructed\n";
 }
 Cat& Cat::operator=(Cat& other){
+	std::cout << "cat asssignment operator\n";
 	if (this != &other) {
 		Animal::operator=(other);
-		this->brain = new Brain(*other.brain);
 		delete this->brain;
+		this->brain = new Brain(*other.brain);
 	}
 	return *this;
 }
