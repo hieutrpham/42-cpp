@@ -1,5 +1,4 @@
 #include "Bureaucrat.hpp"
-#include <iostream>
 
 Bureaucrat::Bureaucrat() : m_name("cookie"), m_grade(150) {}
 
@@ -31,9 +30,14 @@ void Bureaucrat::decrementGrade() {
 void Bureaucrat::incrementGrade() {
 	m_grade++;
 	// TODO: throw exception
+	throw GradeTooHighException();
+}
+
+const char *Bureaucrat::GradeTooHighException::what() const noexcept {
+	return "too high";
 }
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b) {
 	out << b.getName() + ", bureaucrat grade " << b.getGrade() << std::endl;
 	return out;
-
+}

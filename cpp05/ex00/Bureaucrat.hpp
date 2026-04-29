@@ -1,4 +1,5 @@
 #pragma once
+#include <exception>
 #include <iostream>
 #include <ostream>
 
@@ -17,6 +18,10 @@ public:
 	int getGrade() const;
 	void incrementGrade();
 	void decrementGrade();
+	class GradeTooHighException : public std::exception {
+	public:
+		virtual const char *what() const noexcept override;
+	};
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b);
