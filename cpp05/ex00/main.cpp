@@ -3,18 +3,21 @@
 #include <iostream>
 
 int main() {
-	Bureaucrat b;
-	Bureaucrat a("heiu", 1);
-	Bureaucrat c;
-	Bureaucrat d(b);
-	std::cout << b << std::endl;
-	std::cout << a << std::endl;
-	std::cout << c << std::endl;
-	c = a;
-	std::cout << c << std::endl;
 	try {
-	b.incrementGrade();
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		Bureaucrat b;
+		Bureaucrat a("hieu", 1);
+		Bureaucrat c;
+		Bureaucrat d(b);
+		LOG(b);
+		LOG(b);
+		LOG(b);
+		c = a;
+		LOG(c);
+		b.decrementGrade();
+		LOG(b);
+		a.incrementGrade();
+		LOG(a);
+	} catch (std::exception& e) {
+		ERR(e.what());
 	}
 }

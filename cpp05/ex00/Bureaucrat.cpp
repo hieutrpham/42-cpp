@@ -2,7 +2,13 @@
 
 Bureaucrat::Bureaucrat() : m_name("cookie"), m_grade(150) {}
 
-Bureaucrat::Bureaucrat(const std::string &name, int grade) : m_name(name), m_grade(grade){}
+Bureaucrat::Bureaucrat(const std::string &name, int grade) : m_name(name) {
+	if (grade <= 0)
+		throw GradeTooHighException();
+	if (grade >= 150)
+		throw GradeTooLowException();
+	m_grade = grade;
+}
 
 Bureaucrat::~Bureaucrat() {}
 
@@ -23,21 +29,28 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::decrementGrade() {
-	m_grade--;
-	// TODO: throw exception
+	int temp = m_grade + 1;
+	if (temp > 150)
+		throw GradeTooLowException();
+	m_grade = temp;
 }
 
 void Bureaucrat::incrementGrade() {
-	m_grade++;
-	// TODO: throw exception
-	throw GradeTooHighException();
+	int temp = m_grade - 1;
+	if (temp < 1)
+		throw GradeTooHighException();
+	m_grade = temp;
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const noexcept {
-	return "too high";
+	return "grade too high";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const noexcept {
+	return "grade too low";
 }
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b) {
-	out << b.getName() + ", bureaucrat grade " << b.getGrade() << std::endl;
+	out << b.getName() + ", bureaucrat grade " << b.getGrade() << '.';
 	return out;
 }

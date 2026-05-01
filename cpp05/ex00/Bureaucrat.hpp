@@ -3,6 +3,9 @@
 #include <iostream>
 #include <ostream>
 
+#define LOG(msg) (std::cout << "LOG: " << (msg) << std::endl)
+#define ERR(msg) (std::cerr << __FILE__ << ":" << __LINE__ << ": error: " << (msg) << std::endl)
+
 class Bureaucrat {
 private:
 	const std::string m_name;
@@ -18,6 +21,12 @@ public:
 	int getGrade() const;
 	void incrementGrade();
 	void decrementGrade();
+
+	class GradeTooLowException : public std::exception {
+	public:
+		virtual const char *what() const noexcept override;
+	};
+
 	class GradeTooHighException : public std::exception {
 	public:
 		virtual const char *what() const noexcept override;
