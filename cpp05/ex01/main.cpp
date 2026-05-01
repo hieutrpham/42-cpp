@@ -1,6 +1,5 @@
 #include "Bureaucrat.hpp"
-#include <exception>
-#include <iostream>
+#include "Form.hpp"
 
 int main() {
 	try {
@@ -13,10 +12,22 @@ int main() {
 		LOG(c);
 		c = a;
 		LOG(c);
-		b.decrementGrade();
+		b.incrementGrade();
 		LOG(b);
-		a.incrementGrade();
+		a.decrementGrade();
 		LOG(a);
+	} catch (std::exception& e) {
+		ERR(e.what());
+	}
+
+	try {
+		Form a, b, c;
+		LOG(a);
+		LOG(b);
+		LOG(c);
+		Form d(b);
+		LOG(d);
+		c = a;
 	} catch (std::exception& e) {
 		ERR(e.what());
 	}
