@@ -49,14 +49,14 @@ int Form::getRequiredGradeToExec() const {
 }
 
 const char* Form::GradeTooHighException::what() const noexcept {
-	return "FORM: grade too high";
+	return "grade too high";
 }
 
 const char* Form::GradeTooLowException::what() const noexcept {
-	return "FORM: grade too low";
+	return "grade too low";
 }
 
-void Form::beSigned(Bureaucrat& b) {
+void Form::beSigned(const Bureaucrat& b) {
 	if (b.getGrade() <= m_required_grade_to_sign)
 		m_is_signed = true;
 	else

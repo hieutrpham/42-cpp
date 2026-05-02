@@ -4,6 +4,8 @@
 #include <ostream>
 #include <string>
 
+class Bureaucrat;
+
 class Form {
 private:
 	const std::string m_name;
@@ -30,7 +32,7 @@ public:
 			virtual const char* what() const noexcept override;
 	};
 
-	void beSigned(Bureaucrat& b);
+	void beSigned(const Bureaucrat& b);
 };
 
 std::ostream& operator<<(std::ostream& out, Form& form);

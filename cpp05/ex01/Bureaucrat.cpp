@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include <iostream>
 
 Bureaucrat::Bureaucrat() : m_name("cookie"), m_grade(150) {}
 
@@ -48,6 +49,16 @@ const char *Bureaucrat::GradeTooHighException::what() const noexcept {
 
 const char *Bureaucrat::GradeTooLowException::what() const noexcept {
 	return "grade too low";
+}
+
+void Bureaucrat::signForm(Form& form) const {
+	try {
+		form.beSigned(*this);
+		std::cout << m_name << " signed " << form.getName() << std::endl;
+	} catch (std::exception& e) {
+		std::cerr << m_name << " couldn't sign " << form.getName()
+			<< " because " << e.what() << std::endl;
+	}
 }
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b) {

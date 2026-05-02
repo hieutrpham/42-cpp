@@ -1,10 +1,13 @@
 #pragma once
+#include "Form.hpp"
 #include <exception>
 #include <iostream>
 #include <ostream>
 
 #define LOG(msg) (std::cout << "LOG: " << (msg) << std::endl)
 #define ERR(msg) (std::cerr << __FILE__ << ":" << __LINE__ << ": error: " << (msg) << std::endl)
+
+class Form;
 
 class Bureaucrat {
 private:
@@ -31,6 +34,8 @@ public:
 	public:
 		virtual const char *what() const noexcept override;
 	};
+
+	void signForm(Form &form) const;
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b);
