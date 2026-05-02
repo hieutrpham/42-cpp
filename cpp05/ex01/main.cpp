@@ -28,6 +28,11 @@ int main() {
 		Form d(b);
 		LOG(d);
 		c = a;
+		Bureaucrat b1("hieu", 1);
+		Form e("cookie", 0, 3, 123);
+		LOG(e);
+		e.beSigned(b1);
+		LOG(e);
 	} catch (std::exception& e) {
 		ERR(e.what());
 	}
