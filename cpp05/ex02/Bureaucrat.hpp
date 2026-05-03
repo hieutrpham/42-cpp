@@ -7,7 +7,7 @@
 #define LOG(msg) (std::cout << "LOG: " << (msg) << std::endl)
 #define ERR(msg) (std::cerr << __FILE__ << ":" << __LINE__ << ": error: " << (msg) << std::endl)
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 private:
@@ -35,7 +35,7 @@ public:
 		virtual const char *what() const noexcept override;
 	};
 
-	void signForm(Form &form) const;
+	void signForm(AForm &form) const;
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b);

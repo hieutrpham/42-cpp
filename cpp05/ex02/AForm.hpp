@@ -6,18 +6,18 @@
 
 class Bureaucrat;
 
-class Form {
+class AForm {
 private:
 	const std::string m_name;
 	bool m_is_signed;
 	const int m_required_grade_to_sign;
 	const int m_required_grade_to_execute;
 public:
-	Form();
-	virtual ~Form() = 0;
-	Form(const Form&);
-	Form(const std::string, bool, const int, const int);
-	Form& operator=(const Form&);
+	AForm();
+	virtual ~AForm() = 0;
+	AForm(const AForm&);
+	AForm(const std::string, bool, const int, const int);
+	AForm& operator=(const AForm&);
 	std::string getName() const;
 	bool getIsSigned() const;
 	int getRequiredGradeToSign() const;
@@ -35,4 +35,4 @@ public:
 	void beSigned(const Bureaucrat& b);
 };
 
-std::ostream& operator<<(std::ostream& out, Form& form);
+std::ostream& operator<<(std::ostream& out, AForm& form);

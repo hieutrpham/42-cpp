@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include <iostream>
 #include <ostream>
 
@@ -23,18 +24,13 @@ int main() {
 	}
 
 	try {
-		Form a, b, c;
+		ShrubberyCreationForm a, b, c;
 		LOG(a);
 		LOG(b);
 		LOG(c);
-		Form d(b);
+		ShrubberyCreationForm d(b);
 		LOG(d);
 		c = a;
-		Bureaucrat b1("hieu", 4);
-		Form e("cookie", 0, 3, 123);
-		LOG(e);
-		b1.signForm(e);
-		LOG(e);
 	} catch (std::exception& e) {
 		ERR(e.what());
 	}
