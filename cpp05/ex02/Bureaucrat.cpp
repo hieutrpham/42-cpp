@@ -6,7 +6,7 @@ Bureaucrat::Bureaucrat() : m_name("cookie"), m_grade(150) {}
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : m_name(name) {
 	if (grade <= 0)
 		throw GradeTooHighException();
-	if (grade >= 150)
+	if (grade > 150)
 		throw GradeTooLowException();
 	m_grade = grade;
 }
