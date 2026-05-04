@@ -6,31 +6,16 @@
 
 int main() {
 	try {
-		Bureaucrat b;
-		Bureaucrat a("hieu", 1);
-		Bureaucrat c;
-		Bureaucrat d(b);
-		LOG(b);
-		LOG(a);
-		LOG(c);
-		c = a;
-		LOG(c);
-		b.incrementGrade();
-		LOG(b);
-		a.decrementGrade();
-		LOG(a);
-	} catch (std::exception& e) {
-		ERR(e.what());
-	}
-
-	try {
-		ShrubberyCreationForm a, b, c;
+		Bureaucrat b1("heiru", 146);
+		ShrubberyCreationForm a("a"), b("home"), c;
 		LOG(a);
 		LOG(b);
 		LOG(c);
 		ShrubberyCreationForm d(b);
 		LOG(d);
 		c = a;
+		b.formAction();
+		a.beSigned(b1);
 	} catch (std::exception& e) {
 		ERR(e.what());
 	}

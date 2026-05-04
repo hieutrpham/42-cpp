@@ -22,6 +22,9 @@ public:
 	bool getIsSigned() const;
 	int getRequiredGradeToSign() const;
 	int getRequiredGradeToExec() const;
+	void beSigned(const Bureaucrat& b);
+
+private:
 	class GradeTooHighException : public std::exception {
 		public:
 			virtual const char* what() const noexcept override;
@@ -31,8 +34,6 @@ public:
 		public:
 			virtual const char* what() const noexcept override;
 	};
-
-	void beSigned(const Bureaucrat& b);
 };
 
 std::ostream& operator<<(std::ostream& out, AForm& form);

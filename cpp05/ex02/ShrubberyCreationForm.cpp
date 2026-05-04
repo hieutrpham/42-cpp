@@ -2,7 +2,7 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", false, 145, 137), m_target("default") {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : m_target(target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : AForm("ShrubberyCreationForm", false, 145, 137), m_target(target) {}
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
@@ -18,9 +18,21 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void ShrubberyCreationForm::formAction() const {
 	std::string file_name = m_target + "_shrubberry";
-	std::ofstream outfile(file_name);
+	std::fstream outfile(file_name, outfile.out);
 	if (!outfile.is_open()) {
-		throw std::system_error();
+		throw std::runtime_error("could not open file");
 	}
-	// TODO: write ascii trees to outfile
+	outfile << R"(
+       _-_              _-_              _-_              _-_
+    /~~   ~~\        /~~   ~~\        /~~   ~~\        /~~   ~~\\
+ /~~         ~~\  /~~         ~~\  /~~         ~~\  /~~         ~~\\
+{               }{               }{               }{               }
+ \  _-     -_  /  \  _-     -_  /  \  _-     -_  /  \  _-     -_  /
+   ~  \\ //  ~      ~  \\ //  ~      ~  \\ //  ~      ~  \\ //  ~
+_- -   | | _- _  _- -   | | _- _  _- -   | | _- _  _- -   | | _- _
+  _ -  | |   -_    _ -  | |   -_    _ -  | |   -_    _ -  | |   -_
+      // \\            // \\            // \\            // \\
+	)";
+
+	LOG("ShrubberyCreationForm performed action");
 }

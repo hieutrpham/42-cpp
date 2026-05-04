@@ -25,6 +25,7 @@ public:
 	void incrementGrade();
 	void decrementGrade();
 
+	private:
 	class GradeTooLowException : public std::exception {
 	public:
 		virtual const char *what() const noexcept override;
