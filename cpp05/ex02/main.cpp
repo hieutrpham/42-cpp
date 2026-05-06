@@ -6,7 +6,7 @@
 
 int main() {
 	try {
-		Bureaucrat b1("heiru", 1);
+		Bureaucrat b1("heiru", 150);
 		ShrubberyCreationForm a("a"), b("home"), c;
 		LOG(a);
 		LOG(b);
@@ -14,7 +14,8 @@ int main() {
 		ShrubberyCreationForm d(b);
 		LOG(d);
 		c = a;
-		b.execute(b1);
+		b1.signForm(a);
+		b1.executeForm(a);
 	} catch (std::exception& e) {
 		ERR(e.what());
 	}

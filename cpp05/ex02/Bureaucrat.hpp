@@ -24,8 +24,10 @@ public:
 	int getGrade() const;
 	void incrementGrade();
 	void decrementGrade();
+	void executeForm(const AForm& form) const;
+	void signForm(AForm &form) const;
 
-	private:
+private:
 	class GradeTooLowException : public std::exception {
 	public:
 		virtual const char *what() const noexcept override;
@@ -36,7 +38,6 @@ public:
 		virtual const char *what() const noexcept override;
 	};
 
-	void signForm(AForm &form) const;
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b);
