@@ -23,6 +23,8 @@ public:
 	int getRequiredGradeToSign() const;
 	int getRequiredGradeToExec() const;
 	void beSigned(const Bureaucrat& b);
+	void execute(const Bureaucrat&) const;
+	virtual void formAction() const = 0;
 
 private:
 	class GradeTooHighException : public std::exception {
@@ -33,6 +35,16 @@ private:
 	class GradeTooLowException : public std::exception {
 		public:
 			virtual const char* what() const noexcept override;
+	};
+
+	class FormNotSigned : public std::exception {
+	public:
+		virtual const char* what() const noexcept override;
+	};
+
+	class ExecException : public std::exception {
+	public:
+		virtual const char* what() const noexcept override;
 	};
 };
 
