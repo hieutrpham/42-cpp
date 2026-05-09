@@ -1,17 +1,19 @@
 #include "AForm.hpp"
 
-AForm::AForm() : m_name("default"), m_is_signed(false), m_required_grade_to_sign(150), m_required_grade_to_execute(150) {}
+AForm::AForm() : m_name("default"),
+	m_required_grade_to_sign(150),
+	m_required_grade_to_execute(150) {}
 
 AForm::~AForm() {}
 
 AForm::AForm(
 	const std::string name,
-	bool is_signed,
 	const int required_grade_to_sign,
 	const int required_grade_to_execute) :
-	m_name(name), m_is_signed(is_signed),
+	m_name(name),
 	m_required_grade_to_sign(required_grade_to_sign),
-	m_required_grade_to_execute(required_grade_to_execute)
+	m_required_grade_to_execute(required_grade_to_execute),
+	m_is_signed(false)
 {
 	if (required_grade_to_sign < 1 || required_grade_to_execute < 1)
 		throw AForm::GradeTooHighException();
@@ -21,9 +23,10 @@ AForm::AForm(
 
 AForm::AForm(const AForm& other) :
 	m_name(other.m_name),
-	m_is_signed(other.m_is_signed),
 	m_required_grade_to_sign(other.m_required_grade_to_sign),
-	m_required_grade_to_execute(other.m_required_grade_to_execute) {}
+	m_required_grade_to_execute(other.m_required_grade_to_execute),
+	m_is_signed(other.m_is_signed)
+{}
 
 AForm& AForm::operator=(const AForm& other) {
 	if (this != &other) {

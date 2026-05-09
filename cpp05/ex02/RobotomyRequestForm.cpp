@@ -3,9 +3,9 @@
 #include <iostream>
 #include <ctime>
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", false, 72, 45), m_target("default") {}
+RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45), m_target("default") {}
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : AForm("RobotomyRequestForm", false, 72, 45), m_target(target) {}
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : AForm("RobotomyRequestForm", 72, 45), m_target(target) {}
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 

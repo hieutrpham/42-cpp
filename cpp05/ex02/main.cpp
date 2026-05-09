@@ -8,14 +8,10 @@
 int main() {
 	try {
 		Bureaucrat b1("heiru", 1);
-		// ShrubberyCreationForm a("a");
+		ShrubberyCreationForm a("a");
 		RobotomyRequestForm b("b");
-		// LOG(a);
-		// LOG(b);
-		// LOG(c);
-		// ShrubberyCreationForm d(b);
-		// LOG(d);
-		// c = a;
+		LOG(a);
+		LOG(b);
 		b1.signForm(b);
 		b1.executeForm(b);
 	} catch (std::exception& e) {
