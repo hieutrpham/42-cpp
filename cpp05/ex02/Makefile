@@ -3,7 +3,7 @@ NAME = main
 CFLAGS = -Wall -Werror -Wextra
 DFLAGS = -MMD -MP
 SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
-	  RobotomyRequestForm.cpp
+	  RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OBJ = $(SRC:.cpp=.o)
 OBJ_PATH = obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
