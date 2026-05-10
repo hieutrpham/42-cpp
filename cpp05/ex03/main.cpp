@@ -26,6 +26,9 @@ int main() {
 		AForm *f = i.makeForm("president", "home");
 		AForm *f1 = i.makeForm("shrubbery", "home");
 		AForm *f2 = i.makeForm("robotomy", "home");
+		f->beSigned(b1);
+		b1.signForm(*f);
+		b1.executeForm(*f);
 		LOG(f->getName());
 		LOG(f1->getName());
 		LOG(f2->getName());

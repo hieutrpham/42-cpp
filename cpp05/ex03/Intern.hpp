@@ -1,6 +1,12 @@
 #pragma once
 #include "AForm.hpp"
 
+static const std::string names[] = {
+	"shrubbery",
+	"robotomy",
+	"president",
+};
+
 enum {
 	SHRUBBERY,
 	ROBOTOMY,
