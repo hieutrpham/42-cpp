@@ -17,9 +17,9 @@ AForm* Intern::makeForm(std::string name, std::string target) {
 	};
 
 	FormMap forms[] = {
-		{"shrubbery", [](const std::string& t) -> AForm* { return new ShrubberyCreationForm(t); }},
-		{"robotomy",   [](const std::string& t) -> AForm* { return new RobotomyRequestForm(t); }},
-		{"president", [](const std::string& t) -> AForm* { return new PresidentialPardonForm(t); }},
+		{.name = "shrubbery", .create = [](const std::string& t) -> AForm* { return new ShrubberyCreationForm(t); }},
+		{.name = "robotomy", .create = [](const std::string& t) -> AForm* { return new RobotomyRequestForm(t); }},
+		{.name = "president", .create = [](const std::string& t) -> AForm* { return new PresidentialPardonForm(t); }},
 	};
 
 	for (long unsigned int i = 0; i < sizeof(forms)/sizeof(*forms); i++) {
