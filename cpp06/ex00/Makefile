@@ -2,7 +2,7 @@ CC = c++ -std=c++20
 NAME = main
 CFLAGS = -Wall -Werror -Wextra
 DFLAGS = -MMD -MP
-SRC = main.cpp
+SRC = main.cpp ScalarConverter.cpp
 OBJ = $(SRC:.cpp=.o)
 OBJ_PATH = obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
