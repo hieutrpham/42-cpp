@@ -6,8 +6,15 @@
 
 void ScalarConverter::convert(const std::string& literal)
 {
-	enum class Type { CHAR, INT, FLOAT, DOUBLE, UNKNOWN };
-	auto actual_type = Type::UNKNOWN;
+	enum class Type {
+		CHAR,
+		INT,
+		FLOAT,
+		DOUBLE,
+		UNKNOWN
+	};
+
+	Type actual_type = Type::UNKNOWN;
 
 	if (literal.length() == 1 && !std::isdigit(literal[0]) && std::isprint(literal[0]))
 		actual_type = Type::CHAR;
@@ -55,9 +62,8 @@ void ScalarConverter::convert(const std::string& literal)
 	else
 		std::cout << "float: " << f << "f\n";
 
-	double d = static_cast<double>(base_value);
-	if (d == static_cast<int>(d) && !std::isnan(d) && !std::isinf(d))
-		std::cout << "double: " << d << ".0\n";
+	if (base_value == static_cast<int>(base_value) &&!std::isnan(base_value) && !std::isinf(base_value))
+		std::cout << "double: " << base_value << ".0\n";
 	else
-		std::cout << "double: " << d << "\n";
+		std::cout << "double: " << base_value << "\n";
 }
