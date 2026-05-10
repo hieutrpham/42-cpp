@@ -1,0 +1,11 @@
+#pragma once
+
+class ScalarConverter {
+private:
+		ScalarConverter() = delete;
+		ScalarConverter(const ScalarConverter&) = delete;
+		ScalarConverter& operator=(const ScalarConverter&) = delete;
+		~ScalarConverter() = delete;
+public:
+	static void convert(const std::string&);
+};

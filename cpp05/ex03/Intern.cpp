@@ -11,19 +11,23 @@ Intern::Intern(const Intern&){}
 Intern& Intern::operator=(const Intern&){ return *this; }
 
 AForm* Intern::makeForm(std::string name, std::string target) {
-	int index = -1;
-	for (long unsigned int i = 0; i < sizeof(names)/sizeof(*names); ++i) {
-		if (name == names[i]) {
-			index = i;
-			break;
+	struct FormMap {
+		std::string name;
+		AForm* (*create)(const std::string& target);
+	};
+
+	FormMap forms[] = {
+		{"shrubbery", [](const std::string& t) -> AForm* { return new ShrubberyCreationForm(t); }},
+		{"robotomy",   [](const std::string& t) -> AForm* { return new RobotomyRequestForm(t); }},
+		{"president", [](const std::string& t) -> AForm* { return new PresidentialPardonForm(t); }},
+	};
+
+	for (long unsigned int i = 0; i < sizeof(forms)/sizeof(*forms); i++) {
+		if (name == forms[i].name) {
+			std::cout << "Intern creates " << name << std::endl;
+			return forms[i].create(target);
 		}
 	}
-	AForm *f = NULL;
-	switch (index) {
-		case SHRUBBERY: f = new ShrubberyCreationForm(target); break;
-		case ROBOTOMY: f = new RobotomyRequestForm(target); break;
-		case PRESIDENT: f = new PresidentialPardonForm(target); break;
-		default: throw std::runtime_error("invalid form name");
-	}
-	return f;
+
+	throw std::runtime_error("Invalid form");
 }
