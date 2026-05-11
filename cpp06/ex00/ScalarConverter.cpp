@@ -1,29 +1,53 @@
 #include "ScalarConverter.hpp"
+#include <cctype>
 
 std::ostream& operator<<(std::ostream& o, Type& t) {
 	switch (t) {
-		case Type::CHAR: o << "char"; break;
-		case Type::INT: o << "int"; break;
-		case Type::FLOAT: o << "float"; break;
-		case Type::DOUBLE: o << "double"; break;
-		default: o << "unknown";
+		case  Type::CHAR:    o <<  "char";    break;
+		case  Type::INT:     o <<  "int";     break;
+		case  Type::FLOAT:   o <<  "float";   break;
+		case  Type::DOUBLE:  o <<  "double";  break;
+		default:			 o <<  "unknown";
 	}
 	return o;
 }
 
+void impossible() {
+	std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible\n";
+}
+
+bool is_type_double(const std::string& str) {
+	return str == "-inf" || str == "+inf" || str == "nan" ||
+		((str.find('.') != std::string::npos) && !std::isalpha(str.back()));
+}
+
+bool is_type_float(const std::string& str) {
+	bool is_float = true;
+	for (auto c : str) {
+		if (std::isalpha(c) && c != 'f')
+			is_float = false;
+	}
+
+	return str == "-inff" || str == "+inff" || str == "nanf" ||
+		(is_float && str.find('.') != std::string::npos && str.back() == 'f');
+}
+
 void ScalarConverter::convert(const std::string& str)
 {
-	Type actual_type = Type::UNKNOWN;
+	if (str.empty()) {
+		impossible();
+		return;
+	}
+
+	Type actual_type;
 
 	if (str.length() == 1 && !std::isdigit(str[0]) && std::isprint(str[0]))
 		actual_type = Type::CHAR;
-	else if (str == "-inff" || str == "+inff" || str == "nanf" ||
-		(str.find('.') != std::string::npos && str.back() == 'f'))
+	else if (is_type_float(str))
 		actual_type = Type::FLOAT;
-	else if (str == "-inf" || str == "+inf" || str == "nan" ||
-		(str.find('.') != std::string::npos))
+	else if (is_type_double(str))
 		actual_type = Type::DOUBLE;
-	else if (str.find('.') == std::string::npos)
+	else if (str.find('.') == std::string::npos && !std::isalpha(str.back()))
 		actual_type = Type::INT;
 	else
 		actual_type = Type::UNKNOWN;
@@ -41,11 +65,11 @@ void ScalarConverter::convert(const std::string& str)
 			case Type::FLOAT: base_value = static_cast<double>(std::stof(str)); break;
 			case Type::DOUBLE: base_value = std::stod(str); break;
 			default:
-				std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible\n";
+				impossible();
 				return;
 		}
 	} catch (std::exception &e) {
-		std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible\n";
+		impossible();
 		return;
 	}
 
