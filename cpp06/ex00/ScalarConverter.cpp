@@ -14,7 +14,7 @@ void ScalarConverter::convert(const std::string& literal)
 		UNKNOWN
 	};
 
-	Type actual_type = Type::UNKNOWN;
+	Type actual_type;
 
 	if (literal.length() == 1 && !std::isdigit(literal[0]) && std::isprint(literal[0]))
 		actual_type = Type::CHAR;
@@ -24,8 +24,12 @@ void ScalarConverter::convert(const std::string& literal)
 	else if (literal == "-inf" || literal == "+inf" || literal == "nan" ||
 		(literal.find('.') != std::string::npos))
 		actual_type = Type::DOUBLE;
-	else
+	else if (literal.find('.') == std::string::npos)
 		actual_type = Type::INT;
+	else
+		actual_type = Type::UNKNOWN;
+
+	std::cout << "type: " << (int)actual_type << std::endl;
 
 	double base_value = 0.0;
 
@@ -41,6 +45,7 @@ void ScalarConverter::convert(const std::string& literal)
 		}
 	} catch (std::exception &e) {
 		std::cerr << "Exception: " << e.what() << std::endl;
+		return;
 	}
 
 	if (std::isnan(base_value) || std::isinf(base_value) || base_value < 0 || base_value > 127)

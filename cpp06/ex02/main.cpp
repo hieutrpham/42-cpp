@@ -5,9 +5,8 @@
 
 int main()
 {
-	std::srand(std::time(NULL));
-	try
-	{
+	std::srand(std::time({}));
+	try {
 		Base* random_obj = generate();
 
 		std::cout << "Identifying via pointer: ";
@@ -16,9 +15,7 @@ int main()
 		std::cout << "Identifying via reference: ";
 		identify(*random_obj);
 		delete random_obj;
-	}
-	catch (const std::exception& e)
-	{
+	} catch (const std::exception& e) {
 		std::cerr << "An unexpected error occurred: " << e.what() << "\n";
 		return 1;
 	}
