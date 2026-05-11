@@ -24,7 +24,7 @@ $(NAME): $(OBJS)
 -include $(DEP)
 
 clean:
-	rm -f $(OBJS) $(DEP)
+	rm -rf $(OBJ_PATH) $(DEP)
 
 fclean: clean
 	rm -f $(NAME)

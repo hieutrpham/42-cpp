@@ -6,6 +6,8 @@
 
 # whitelist hpp, cpp
 !*.*pp
+!*.h
+!*.c
 
 # whitelist makefile
 !Makefile

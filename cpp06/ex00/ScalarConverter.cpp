@@ -1,44 +1,45 @@
 #include "ScalarConverter.hpp"
-#include <iostream>
-#include <limits>
-#include <cmath>
-#include <iomanip>
 
-void ScalarConverter::convert(const std::string& literal)
+std::ostream& operator<<(std::ostream& o, Type& t) {
+	switch (t) {
+		case Type::CHAR: o << "char"; break;
+		case Type::INT: o << "int"; break;
+		case Type::FLOAT: o << "float"; break;
+		case Type::DOUBLE: o << "double"; break;
+		default: o << "unknown";
+	}
+	return o;
+}
+
+void ScalarConverter::convert(const std::string& str)
 {
-	enum class Type {
-		CHAR,
-		INT,
-		FLOAT,
-		DOUBLE,
-		UNKNOWN
-	};
+	Type actual_type = Type::UNKNOWN;
 
-	Type actual_type;
-
-	if (literal.length() == 1 && !std::isdigit(literal[0]) && std::isprint(literal[0]))
+	if (str.length() == 1 && !std::isdigit(str[0]) && std::isprint(str[0]))
 		actual_type = Type::CHAR;
-	else if (literal == "-inff" || literal == "+inff" || literal == "nanf" ||
-		(literal.find('.') != std::string::npos && literal.back() == 'f'))
+	else if (str == "-inff" || str == "+inff" || str == "nanf" ||
+		(str.find('.') != std::string::npos && str.back() == 'f'))
 		actual_type = Type::FLOAT;
-	else if (literal == "-inf" || literal == "+inf" || literal == "nan" ||
-		(literal.find('.') != std::string::npos))
+	else if (str == "-inf" || str == "+inf" || str == "nan" ||
+		(str.find('.') != std::string::npos))
 		actual_type = Type::DOUBLE;
-	else if (literal.find('.') == std::string::npos)
+	else if (str.find('.') == std::string::npos)
 		actual_type = Type::INT;
 	else
 		actual_type = Type::UNKNOWN;
 
-	std::cout << "type: " << (int)actual_type << std::endl;
-
 	double base_value = 0.0;
+
+	#ifdef DEBUG
+	std::cout << "LOG: actual type: " << actual_type << std::endl;
+	#endif
 
 	try {
 		switch (actual_type) {
-			case Type::CHAR: base_value = static_cast<double>(literal[0]); break;
-			case Type::INT: base_value = static_cast<double>(std::stoi(literal)); break;
-			case Type::FLOAT: base_value = static_cast<double>(std::stof(literal)); break;
-			case Type::DOUBLE: base_value = std::stod(literal); break;
+			case Type::CHAR: base_value = static_cast<double>(str[0]); break;
+			case Type::INT: base_value = static_cast<double>(std::stoi(str)); break;
+			case Type::FLOAT: base_value = static_cast<double>(std::stof(str)); break;
+			case Type::DOUBLE: base_value = std::stod(str); break;
 			default:
 				std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible\n";
 				return;
