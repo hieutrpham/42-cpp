@@ -45,7 +45,7 @@ void ScalarConverter::convert(const std::string& str)
 				return;
 		}
 	} catch (std::exception &e) {
-		std::cerr << "Exception: " << e.what() << std::endl;
+		std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible\n";
 		return;
 	}
 
