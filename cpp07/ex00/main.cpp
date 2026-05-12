@@ -19,25 +19,20 @@ int main()
 	std::cout << "min(c, d) = " << ::min(c, d) << std::endl;
 	std::cout << "max(c, d) = " << ::max(c, d) << std::endl;
 
-	std::cout << "\n---- ADDITIONAL TESTS ----\n";
-	std::cout << "\n== Edge case 1: Equal values ==\n";
 	int e = 5, f = 5;
 	std::cout << "min(5, 5) = " << ::min(e, f) << std::endl;
 	std::cout << "max(5, 5) = " << ::max(e, f) << std::endl;
 
-	std::cout << "\n== Edge case 2: Self-swap ==\n";
 	int g = 42;
 	std::cout << "before swap: g = " << g << std::endl;
 	::swap(g, g);
 	std::cout << "after swap(g, g): g = " << g << std::endl;
 
-	std::cout << "\n== Edge case 3: negative numbers ==\n";
 	int h = -5;
 	int i = -3;
 	std::cout << "min(-5, -3) = " << ::min(h, i) << std::endl;
 	std::cout << "max(-5, -3) = " << ::max(h, i) << std::endl;
 
-	std::cout << "\n== Edge case 4: Floats ==\n";
 	float j = 1.1f;
 	float k = 1.2f;
 	std::cout << "before swap: j = " << j << ", k = " << k << std::endl;
