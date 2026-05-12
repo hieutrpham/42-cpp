@@ -1,4 +1,7 @@
 #include "ScalarConverter.hpp"
+#include <iomanip>
+#include <ios>
+#include <iostream>
 
 std::ostream& operator<<(std::ostream& o, Type& t) {
 	switch (t) {
@@ -42,6 +45,7 @@ bool is_type_float(const std::string& str) {
 
 void ScalarConverter::convert(const std::string& str)
 {
+	std::cout << std::fixed << std::showpoint << std::setprecision(1);
 	if (str.empty()) {
 		impossible();
 		return;
@@ -77,6 +81,9 @@ void ScalarConverter::convert(const std::string& str)
 				return;
 		}
 	} catch (std::exception &e) {
+		#ifdef DEBUG
+		std::cout << e.what() << std::endl;
+		#endif
 		impossible();
 		return;
 	}
@@ -94,14 +101,6 @@ void ScalarConverter::convert(const std::string& str)
 	else
 		std::cout << "int: " << static_cast<int>(base_value) << "\n";
 
-	float f = static_cast<float>(base_value);
-	if (f == static_cast<int>(f) && !std::isnan(f) && !std::isinf(f))
-		std::cout << "float: " << f << ".0f\n";
-	else
-		std::cout << "float: " << f << "f\n";
-
-	if (base_value == static_cast<int>(base_value) &&!std::isnan(base_value) && !std::isinf(base_value))
-		std::cout << "double: " << base_value << ".0\n";
-	else
-		std::cout << "double: " << base_value << "\n";
+	std::cout << "float: " << static_cast<float>(base_value) << "f\n";
+	std::cout << "double: " << base_value << "\n";
 }
