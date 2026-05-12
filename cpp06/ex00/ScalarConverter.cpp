@@ -22,7 +22,7 @@ bool is_type_double(const std::string& str) {
 	bool count_alpha = false;
 
 	for (auto c : str)
-		if (std::isalpha(c)) count_alpha = true;
+		if (std::isalpha(c) || std::isspace(c)) count_alpha = true;
 
 	return str == "-inf" || str == "+inf" || str == "nan" ||
 		(!count_alpha && (str.find('.') != std::string::npos) && !std::isalpha(str.back()));
@@ -33,7 +33,7 @@ bool is_type_float(const std::string& str) {
 	int count = 0;
 
 	for (auto c : str) {
-		if (std::isalpha(c))
+		if (std::isalpha(c) || std::isspace(c))
 			count++;
 		if (std::isalpha(c) && c != 'f')
 			is_float = false;
@@ -41,6 +41,15 @@ bool is_type_float(const std::string& str) {
 
 	return str == "-inff" || str == "+inff" || str == "nanf" ||
 		(count == 1 && is_float && str.find('.') != std::string::npos && str.back() == 'f');
+}
+
+bool is_type_int(const std::string& str) {
+	bool count_alpha = false;
+
+	for (auto c : str)
+		if (std::isalpha(c) || std::isspace(c)) count_alpha = true;
+
+	return str.find('.') == std::string::npos && !count_alpha;
 }
 
 void ScalarConverter::convert(const std::string& str)
@@ -59,7 +68,7 @@ void ScalarConverter::convert(const std::string& str)
 		actual_type = Type::FLOAT;
 	else if (is_type_double(str))
 		actual_type = Type::DOUBLE;
-	else if (str.find('.') == std::string::npos && !std::isalpha(str.back()))
+	else if (is_type_int(str))
 		actual_type = Type::INT;
 	else
 		actual_type = Type::UNKNOWN;
@@ -82,7 +91,7 @@ void ScalarConverter::convert(const std::string& str)
 		}
 	} catch (std::exception &e) {
 		#ifdef DEBUG
-		std::cout << e.what() << std::endl;
+		std::cout << "ERROR: " << e.what() << std::endl;
 		#endif
 		impossible();
 		return;
