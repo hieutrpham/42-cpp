@@ -1,5 +1,4 @@
 #include "ScalarConverter.hpp"
-#include <cctype>
 
 std::ostream& operator<<(std::ostream& o, Type& t) {
 	switch (t) {
@@ -17,19 +16,28 @@ void impossible() {
 }
 
 bool is_type_double(const std::string& str) {
+	bool count_alpha = false;
+
+	for (auto c : str)
+		if (std::isalpha(c)) count_alpha = true;
+
 	return str == "-inf" || str == "+inf" || str == "nan" ||
-		((str.find('.') != std::string::npos) && !std::isalpha(str.back()));
+		(!count_alpha && (str.find('.') != std::string::npos) && !std::isalpha(str.back()));
 }
 
 bool is_type_float(const std::string& str) {
 	bool is_float = true;
+	int count = 0;
+
 	for (auto c : str) {
+		if (std::isalpha(c))
+			count++;
 		if (std::isalpha(c) && c != 'f')
 			is_float = false;
 	}
 
 	return str == "-inff" || str == "+inff" || str == "nanf" ||
-		(is_float && str.find('.') != std::string::npos && str.back() == 'f');
+		(count == 1 && is_float && str.find('.') != std::string::npos && str.back() == 'f');
 }
 
 void ScalarConverter::convert(const std::string& str)
