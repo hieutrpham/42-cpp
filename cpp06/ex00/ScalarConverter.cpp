@@ -9,7 +9,7 @@ std::ostream& operator<<(std::ostream& o, Type& t) {
 		case  Type::INT:     o <<  "int";     break;
 		case  Type::FLOAT:   o <<  "float";   break;
 		case  Type::DOUBLE:  o <<  "double";  break;
-		default:			 o <<  "unknown";
+		default:             o <<  "unknown";
 	}
 	return o;
 }
@@ -30,17 +30,17 @@ bool is_type_double(const std::string& str) {
 
 bool is_type_float(const std::string& str) {
 	bool is_float = true;
-	int count = 0;
+	int count_alpha = 0;
 
 	for (auto c : str) {
 		if (std::isalpha(c) || std::isspace(c))
-			count++;
+			count_alpha++;
 		if (std::isalpha(c) && c != 'f')
 			is_float = false;
 	}
 
 	return str == "-inff" || str == "+inff" || str == "nanf" ||
-		(count == 1 && is_float && str.find('.') != std::string::npos && str.back() == 'f');
+		(count_alpha == 1 && is_float && str.find('.') != std::string::npos && str.back() == 'f');
 }
 
 bool is_type_int(const std::string& str) {
