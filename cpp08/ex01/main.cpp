@@ -26,7 +26,7 @@ int main()
 
 		Span bigSpan(1000000);
 		try {
-			bigSpan.addNumbers(bigVec.begin(), bigVec.end());
+			bigSpan.addNumbers(bigVec);
 		} catch (const std::exception& e) {
 			std::cout << "EXCEPTION: " << e.what() << "\n";
 			return 1;

@@ -20,12 +20,12 @@ class Span
 		~Span();
 		void addNumber(int number);
 
-		template <typename Iterator>
-		void addNumbers(Iterator begin, Iterator end)
+		template <typename T>
+		void addNumbers(T container)
 		{
-			if (m_numbers.size() + static_cast<size_t>(std::distance(begin, end)) > m_maxSize)
+			if (m_numbers.size() + container.size() > m_maxSize)
 				throw std::overflow_error("Unable to add");
-			m_numbers.insert(m_numbers.end(), begin, end);
+			m_numbers.insert(m_numbers.end(), container.begin(), container.end());
 		}
 		int shortestSpan() const;
 		int longestSpan() const;
