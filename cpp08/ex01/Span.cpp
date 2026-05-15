@@ -1,6 +1,12 @@
 #include "Span.hpp"
 
-Span::Span(unsigned int n) : m_maxSize(n) {}
+Span::Span() : m_maxSize(69) {
+	m_numbers.reserve(69);
+}
+
+Span::Span(unsigned int n) : m_maxSize(n) {
+	m_numbers.reserve(n);
+}
 
 Span::Span(const Span& other) : m_maxSize(other.m_maxSize), m_numbers(other.m_numbers) {}
 
