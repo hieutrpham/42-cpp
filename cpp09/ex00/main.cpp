@@ -1,10 +1,11 @@
+#include <cstdlib>
+#include <time.h>
 #include <algorithm>
 #include <cctype>
 #include <fstream>
 #include <iostream>
 #include <map>
 #include <string>
-#include <chrono>
 #include <sstream>
 
 void str_trim(std::string &str);
@@ -53,15 +54,36 @@ int main(int ac, char** av)
 
 	for (std::string line; std::getline(input_stream, line);)
 	{
-		if (line.empty() || line.length() == 0)
+		if (line.empty() || line.length() == 0 || line == "date | value")
 			continue;
 		std::istringstream iss(line);
 		std::string date;
+		double value;
+
 		std::getline(iss, date, '|');
 		str_trim(date);
-		std::cout << date << "\n";
 
-		// coinbase.lower_bound();
+		struct tm tm;
+		if (!strptime(date.c_str(), "%Y-%m-%d", &tm))
+		{
+			std::cout << "Error: bad input => " << date << "\n";
+			continue;
+		}
+
+		iss >> value;
+		if (value < 0)
+		{
+			std::cout << "Error: not a positive number.\n";
+			continue;
+		}
+
+		if (value > 1000)
+		{
+			std::cout << "Error: too large a number.\n";
+			continue;
+		}
+		auto price = coinbase.lower_bound(date)->second;
+		std::cout << date << " => " << value << " = " << value * price << "\n";
 	}
 }
 

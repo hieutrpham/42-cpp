@@ -32,6 +32,6 @@ fclean: clean
 re: fclean all
 
 debug:
-	$(MAKE) CFLAGS="$(CFLAGS) -DDEBUG" re
+	$(MAKE) CFLAGS="$(CFLAGS) -ggdb -DDEBUG" re
 
 .PHONY: all clean fclean re debug
