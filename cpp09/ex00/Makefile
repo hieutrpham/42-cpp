@@ -1,4 +1,4 @@
-CC = c++ -std=c++20
+CC = c++ -std=c++17
 NAME = btc
 CFLAGS = -Wall -Werror -Wextra
 DFLAGS = -MMD -MP
