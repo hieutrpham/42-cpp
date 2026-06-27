@@ -14,10 +14,15 @@ int main(int ac, char** av)
 {
 	if (ac != 2) {
 		std::cerr << "Usage: ./btc <input file>\n";
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	const std::string input = av[1];
+	if (input != "input.txt")
+	{
+		std::cerr << "Invalid input file\n";
+		return EXIT_FAILURE;
+	}
 
 	std::ifstream file("data.csv");
 	if (!file.is_open())
@@ -48,7 +53,7 @@ int main(int ac, char** av)
 	std::ifstream input_stream(input);
 	if (!input_stream.is_open())
 	{
-		std::cerr << "Invalid input file\n";
+		std::cerr << "Unable to open input file\n";
 		return EXIT_FAILURE;
 	}
 
