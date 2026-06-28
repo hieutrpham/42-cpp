@@ -57,10 +57,14 @@ int main(int ac, char** av)
 		return EXIT_FAILURE;
 	}
 
-	for (std::string line; std::getline(input_stream, line);)
+	uint line_num = 0;
+	for (std::string line; std::getline(input_stream, line); line_num++)
 	{
-		if (line.empty() || line.length() == 0 || line == "date | value")
+		if (line.empty() || line.length() == 0 || line_num == 0)
+		{
+			line_num++;
 			continue;
+		}
 		std::istringstream iss(line);
 		std::string date;
 		double value;
