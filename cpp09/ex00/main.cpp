@@ -93,7 +93,11 @@ int main(int ac, char** av)
 			std::cout << "Error: bad input => " << date << "\n";
 			continue;
 		}
-		std::cout << date << " => " << value << " = " << value * price->second << "\n";
+
+		if (iss.eof())
+			std::cout << date << " => " << value << " = " << value * price->second << "\n";
+		else
+			std::cout << "Error: bad format\n";
 	}
 }
 
