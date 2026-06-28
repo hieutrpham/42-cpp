@@ -1,12 +1,4 @@
-#include <cstdlib>
-#include <time.h>
-#include <algorithm>
-#include <cctype>
-#include <fstream>
-#include <iostream>
-#include <map>
-#include <string>
-#include <sstream>
+#include "BitcoinExchange.hpp"
 
 void str_trim(std::string &str);
 
@@ -31,23 +23,7 @@ int main(int ac, char** av)
 		return EXIT_FAILURE;
 	}
 
-	// NOTE: parsing data.csv
-	std::map<std::string, float> coinbase;
-	for (std::string line; std::getline(file, line);)
-	{
-		if (line == "date,exchange_rate")
-		{
-			continue;
-		}
-
-		std::istringstream iss(line);
-		std::string date;
-
-		std::getline(iss, date, ',');
-		float rate;
-		iss >> rate;
-		coinbase[date] = rate;
-	}
+	BitcoinExchange coinbase(file);
 
 	// NOTE: parsing input
 	std::ifstream input_stream(input);
@@ -60,7 +36,7 @@ int main(int ac, char** av)
 	uint line_num = 0;
 	for (std::string line; std::getline(input_stream, line); line_num++)
 	{
-		if (line.empty() || line.length() == 0 || line_num == 0)
+		if (line.empty() || line_num == 0)
 		{
 			line_num++;
 			continue;
@@ -91,8 +67,8 @@ int main(int ac, char** av)
 			std::cout << "Error: too large a number.\n";
 			continue;
 		}
-		auto price = coinbase.lower_bound(date);
-		if (price == coinbase.end())
+		auto price = coinbase.get_data().lower_bound(date);
+		if (price == coinbase.get_data().end())
 		{
 			std::cout << "Error: bad input => " << date << "\n";
 			continue;
