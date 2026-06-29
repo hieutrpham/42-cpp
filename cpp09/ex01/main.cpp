@@ -21,9 +21,20 @@ int handle_op(std::stack<int, std::list<int>> &Stack, char op)
 		case '+':
 			return remove_top(Stack) + remove_top(Stack);
 		case '-':
-			return remove_top(Stack) - remove_top(Stack);
+		{
+			auto num1 = remove_top(Stack);
+			auto num2 = remove_top(Stack);
+			return num2 - num1;
+		}
 		case '/':
-			return remove_top(Stack) / remove_top(Stack);
+		{
+			auto num1 = remove_top(Stack);
+			auto num2 = remove_top(Stack);
+			if (num1 != 0)
+				return num2 / num1;
+			else
+				return 0;
+		}
 		case '*':
 			return remove_top(Stack) * remove_top(Stack);
 		default: return 0;
@@ -69,4 +80,6 @@ int main(int ac, char **av)
 				std::cerr << "Error\n";
 		}
 	}
+	if (!Stack.empty())
+		std::cout << Stack.top();
 }
