@@ -2,7 +2,7 @@ CC = c++ -std=c++17
 NAME = RPN
 CFLAGS = -Wall -Werror -Wextra
 DFLAGS = -MMD -MP
-SRC = main.cpp
+SRC = main.cpp RPN.cpp
 OBJ = $(SRC:.cpp=.o)
 OBJ_PATH = obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))

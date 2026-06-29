@@ -1,52 +1,4 @@
-#include <cctype>
-#include <cstdio>
-#include <list>
-#include <cstdlib>
-#include <iostream>
-#include <sstream>
-#include <stack>
-#include <stdexcept>
-#include <string>
-#include <vector>
-
-int remove_top(std::stack<int, std::list<int>> &Stack)
-{
-	int top = Stack.top();
-	if (!Stack.empty())
-		Stack.pop();
-	else
-		throw std::runtime_error("Stack empty");
-	return top;
-}
-
-int handle_op(std::stack<int, std::list<int>> &Stack, char op)
-{
-	if (Stack.size() < 2)
-		throw std::runtime_error("Invalid stack");
-
-	switch (op) {
-		case '+':
-			return remove_top(Stack) + remove_top(Stack);
-		case '-':
-		{
-			auto num1 = remove_top(Stack);
-			auto num2 = remove_top(Stack);
-			return num2 - num1;
-		}
-		case '/':
-		{
-			auto num1 = remove_top(Stack);
-			auto num2 = remove_top(Stack);
-			if (num1 != 0)
-				return num2 / num1;
-			else
-				return 0;
-		}
-		case '*':
-			return remove_top(Stack) * remove_top(Stack);
-		default: throw std::runtime_error("Invalid operator");
-	}
-}
+#include "RPN.hpp"
 
 int main(int ac, char **av)
 {
@@ -58,7 +10,8 @@ int main(int ac, char **av)
 
 	std::istringstream input(av[1]);
 	std::string token;
-	std::stack<int, std::list<int>> Stack;
+	// std::stack<int, std::list<int>> Stack;
+	RPN Stack;
 
 	while(input >> token)
 	{
@@ -70,7 +23,7 @@ int main(int ac, char **av)
 			if (token == "+")
 			{
 				try {
-					Stack.push(handle_op(Stack, '+'));
+					Stack.push(Stack.handle_op('+'));
 				} catch (...) {
 					goto EXIT;
 				}
@@ -78,7 +31,7 @@ int main(int ac, char **av)
 			else if (token == "-")
 			{
 				try {
-					Stack.push(handle_op(Stack, '-'));
+					Stack.push(Stack.handle_op('-'));
 				} catch (...) {
 					goto EXIT;
 				}
@@ -86,7 +39,7 @@ int main(int ac, char **av)
 			else if (token == "/")
 			{
 				try {
-					Stack.push(handle_op(Stack, '/'));
+					Stack.push(Stack.handle_op('/'));
 				} catch (...) {
 					goto EXIT;
 				}
@@ -94,7 +47,7 @@ int main(int ac, char **av)
 			else if (token == "*")
 			{
 				try {
-					Stack.push(handle_op(Stack, '*'));
+					Stack.push(Stack.handle_op('*'));
 				} catch (...) {
 					goto EXIT;
 				}
