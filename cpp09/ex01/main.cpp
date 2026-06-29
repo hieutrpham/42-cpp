@@ -5,18 +5,25 @@
 #include <iostream>
 #include <sstream>
 #include <stack>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
 int remove_top(std::stack<int, std::list<int>> &Stack)
 {
 	int top = Stack.top();
-	Stack.pop();
+	if (!Stack.empty())
+		Stack.pop();
+	else
+		throw std::runtime_error("Stack empty");
 	return top;
 }
 
 int handle_op(std::stack<int, std::list<int>> &Stack, char op)
 {
+	if (Stack.size() < 2)
+		throw std::runtime_error("Invalid stack");
+
 	switch (op) {
 		case '+':
 			return remove_top(Stack) + remove_top(Stack);
@@ -37,7 +44,7 @@ int handle_op(std::stack<int, std::list<int>> &Stack, char op)
 		}
 		case '*':
 			return remove_top(Stack) * remove_top(Stack);
-		default: return 0;
+		default: throw std::runtime_error("Invalid operator");
 	}
 }
 
@@ -62,24 +69,44 @@ int main(int ac, char **av)
 		} catch (std::exception &e) {
 			if (token == "+")
 			{
-				Stack.push(handle_op(Stack, '+'));
+				try {
+					Stack.push(handle_op(Stack, '+'));
+				} catch (...) {
+					goto EXIT;
+				}
 			}
 			else if (token == "-")
 			{
-				Stack.push(handle_op(Stack, '-'));
+				try {
+					Stack.push(handle_op(Stack, '-'));
+				} catch (...) {
+					goto EXIT;
+				}
 			}
 			else if (token == "/")
 			{
-				Stack.push(handle_op(Stack, '/'));
+				try {
+					Stack.push(handle_op(Stack, '/'));
+				} catch (...) {
+					goto EXIT;
+				}
 			}
 			else if (token == "*")
 			{
-				Stack.push(handle_op(Stack, '*'));
+				try {
+					Stack.push(handle_op(Stack, '*'));
+				} catch (...) {
+					goto EXIT;
+				}
 			}
 			else
+			{
+			EXIT:
 				std::cerr << "Error\n";
+				return 1;
+			}
 		}
 	}
 	if (!Stack.empty())
-		std::cout << Stack.top();
+		std::cout << Stack.top() << "\n";
 }
