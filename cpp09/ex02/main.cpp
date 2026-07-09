@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <utility>
@@ -7,7 +8,8 @@ void foo(std::vector<int> &v, int level)
 {
 	if (v.size() <= 1)
 		return;
-	
+
+	// break sequence into sorted pairs
 	std::vector<std::pair<int, int>> pairs;
 	for (size_t i = 0; i + 1 < v.size(); i += 2)
 	{
@@ -19,23 +21,31 @@ void foo(std::vector<int> &v, int level)
 			pairs.push_back(std::make_pair(a, b));
 	}
 	
+	// initialize main and pend chain
 	std::vector<int> main_chain, pend_chain;
 
-	for (size_t i = 0; i < pairs.size(); ++i)
+	size_t pair_i = 0;
+	for (; pair_i < pairs.size(); ++pair_i)
 	{
-		main_chain.push_back(pairs[i].second);
-		pend_chain.push_back(pairs[i].first);
+		main_chain.push_back(pairs[pair_i].second);
+		pend_chain.push_back(pairs[pair_i].first);
+	}
+
+	// if there are left over numbers, append to pend chain
+	if (v.size() % 2)
+	{
+		pend_chain.push_back(v[pair_i * 2]);
 	}
 
 	std::cout << "Recursion level: " << level << "\n";
-	std::cout << "main_chain: ";
+	printf("main chain: ");
 	for (auto i : main_chain)
-		std::cout << i << " ";
+		std::cout << i << ",";
 	std::cout << "\n";
 
 	std::cout << "pend_chain: ";
 	for (auto i : pend_chain)
-		std::cout << i << " ";
+		std::cout << i << ",";
 	std::cout << "\n";
 
 	// for (size_t i = 0; i < pairs.size(); ++i)
@@ -43,9 +53,11 @@ void foo(std::vector<int> &v, int level)
 
 	foo(main_chain, level + 1);
 
-	// TODO: insert pend_chain into main_chain
+	// TODO: insert pend_chain into main_chain using Jacob sequence
+
 }
 
+#if 1
 int main(int ac, char **av) {
 	if (ac < 3)
 	{
@@ -59,6 +71,17 @@ int main(int ac, char **av) {
 	std::cout << "Original sequence: ";
 	for (auto i: test_sequence)
 		std::cout << i << ' ';
-	std::cout << "\n";
+	std::cout << "\n\n";
 	foo(test_sequence, 1);
 }
+
+#else
+int main ()
+{
+	std::vector<int> test_sequence = {0, 1, 2, 4, 5};
+	auto it = std::lower_bound(test_sequence.begin(), test_sequence.end(), 3);
+	test_sequence.insert(it, 3);
+	for (auto i : test_sequence)
+		std::cout << i << " ";
+}
+#endif
