@@ -53,17 +53,32 @@ void foo(std::vector<int> &v, int level)
 
 	foo(main_chain, level + 1);
 
+	auto sorted = main_chain;
 	// TODO: insert pend_chain into main_chain using Jacob sequence
+	for (auto value : pend_chain)
+	{
+		auto it = std::lower_bound(sorted.begin(), sorted.end(), value);
+		printf("it   : %d\n", *it);
+		printf("value: %d\n", value);
+		sorted.insert(it, value);
+	}
 
+	main_chain = sorted;
+	printf("sorted level %d: ", level);
+	for (auto i : sorted)
+		std::cout << i << " ";
+	std::cout << "\n";
 }
 
 #if 1
 int main(int ac, char **av) {
-	if (ac < 3)
-	{
-		std::cout << "Usage: " << av[0] << " [sequence of numbers to sort]\n";
-		return 1;
-	}
+	(void)ac;
+	(void)av;
+	// if (ac < 3)
+	// {
+	// 	std::cout << "Usage: " << av[0] << " [sequence of numbers to sort]\n";
+	// 	return 1;
+	// }
 
 	// std::vector<int> test_sequence = {11,2,17,0,16,8,6,15,10,3,21,1,18,9,14,19,12,5,4,20,13,7};
 	std::vector<int> test_sequence = {30,49,60,1,31,29,42,46,13,8,5};
@@ -78,9 +93,10 @@ int main(int ac, char **av) {
 #else
 int main ()
 {
-	std::vector<int> test_sequence = {0, 1, 2, 4, 5};
-	auto it = std::lower_bound(test_sequence.begin(), test_sequence.end(), 3);
-	test_sequence.insert(it, 3);
+	std::vector<int> test_sequence = {46, 60};
+	auto value = 49;
+	auto it = std::lower_bound(test_sequence.begin(), test_sequence.end(), value);
+	test_sequence.insert(it, value);
 	for (auto i : test_sequence)
 		std::cout << i << " ";
 }
