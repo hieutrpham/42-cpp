@@ -2,7 +2,7 @@ CC = c++ -std=c++17
 NAME = PmergeMe
 CFLAGS = -Wall -Wextra
 DFLAGS = -MMD -MP
-SRC = main.cpp
+SRC = main.cpp PmergeMe.cpp
 OBJ = $(SRC:.cpp=.o)
 OBJ_PATH = obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
