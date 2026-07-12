@@ -31,8 +31,8 @@ int main(int ac, char **av) {
 	}
 	std::cout << '\n';
 
-    auto start = std::chrono::high_resolution_clock::now();
 	PmergeMe p;
+    auto start = std::chrono::high_resolution_clock::now();
 	p.ford_johnson(seq_vect);
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
