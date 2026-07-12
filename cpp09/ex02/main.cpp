@@ -1,12 +1,14 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdio>
+#include <execution>
 #include <iostream>
 #include <iterator>
 #include <vector>
 #include <list>
 #include <utility>
 #include <cstdint>
+#include <chrono>
 
 static std::vector<int> jacobsthal = {3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525};
 
@@ -64,7 +66,7 @@ std::list<int> jacob_gen_list(size_t pend_size)
 		while (x > 1 && jacob_index.size() < pend_size)
 		{
 			if (std::find(jacob_index.begin(), jacob_index.end(), x) == jacob_index.end())
-				jacob_index.push_back(x);
+				jacob_index.emplace_back(x);
 			x--;
 		}
 	}
@@ -84,7 +86,7 @@ std::vector<int> jacob_gen_vect(size_t pend_size)
 		while (x > 1 && jacob_index.size() < pend_size)
 		{
 			if (std::find(jacob_index.begin(), jacob_index.end(), x) == jacob_index.end())
-				jacob_index.push_back(x);
+				jacob_index.emplace_back(x);
 			x--;
 		}
 	}
@@ -105,9 +107,9 @@ void ford_johnson(std::list<int> &v)
 		int a = *std::next(v.begin(), i);
 		int b = *std::next(v.begin(), i + 1);
 		if (a >= b)
-			pairs.push_back(std::make_pair(b, a));
+			pairs.emplace_back(std::make_pair(b, a));
 		else
-			pairs.push_back(std::make_pair(a, b));
+			pairs.emplace_back(std::make_pair(a, b));
 	}
 
 	// initialize main and pend chain
@@ -115,14 +117,14 @@ void ford_johnson(std::list<int> &v)
 
 	for (auto it = pairs.begin(); it != pairs.end(); ++it)
 	{
-		main_chain.push_back((*it).second);
-		pend_chain.push_back((*it).first);
+		main_chain.emplace_back((*it).second);
+		pend_chain.emplace_back((*it).first);
 	}
 
 	// if there are left over numbers, append to pend chain
 	if (v.size() % 2)
 	{
-		pend_chain.push_back(v.back());
+		pend_chain.emplace_back(v.back());
 	}
 
 	// NOTE: recurse on main_chain
@@ -136,14 +138,14 @@ void ford_johnson(std::list<int> &v)
 		for (auto j = pairs.begin(); j != pairs.end(); ++j)
 		{
 			if (*i == (*j).second)
-				new_pend.push_back((*j).first);
+				new_pend.emplace_back((*j).first);
 		}
 	}
 
 	std::list<int> jacob = jacob_gen_list(new_pend.size());
 
 	if (pend_chain.size() > new_pend.size())
-		new_pend.push_back(pend_chain.back());
+		new_pend.emplace_back(pend_chain.back());
 
 	// insert the first number from pend
 	main_chain.insert(main_chain.begin(), new_pend.front());
@@ -191,9 +193,9 @@ void ford_johnson(std::vector<int> &v)
 		int a = v[i];
 		int b = v[i + 1];
 		if (a >= b)
-			pairs.push_back(std::make_pair(b, a));
+			pairs.emplace_back(std::make_pair(b, a));
 		else
-			pairs.push_back(std::make_pair(a, b));
+			pairs.emplace_back(std::make_pair(a, b));
 	}
 	
 	// initialize main and pend chain
@@ -202,14 +204,14 @@ void ford_johnson(std::vector<int> &v)
 	size_t pair_i = 0;
 	for (; pair_i < pairs.size(); ++pair_i)
 	{
-		main_chain.push_back(pairs[pair_i].second);
-		pend_chain.push_back(pairs[pair_i].first);
+		main_chain.emplace_back(pairs[pair_i].second);
+		pend_chain.emplace_back(pairs[pair_i].first);
 	}
 
 	// if there are left over numbers, append to pend chain
 	if (v.size() % 2)
 	{
-		pend_chain.push_back(v[pair_i * 2]);
+		pend_chain.emplace_back(v[pair_i * 2]);
 	}
 
 	// NOTE: recurse on main_chain
@@ -222,14 +224,14 @@ void ford_johnson(std::vector<int> &v)
 		for (size_t j = 0; j < pairs.size(); ++j)
 		{
 			if (main_chain[i] == pairs[j].second)
-				new_pend.push_back(pairs[j].first);
+				new_pend.emplace_back(pairs[j].first);
 		}
 	}
 
 	std::vector<int> jacob = jacob_gen_vect(new_pend.size());
 
 	if (pend_chain.size() > new_pend.size())
-		new_pend.push_back(pend_chain.back());
+		new_pend.emplace_back(pend_chain.back());
 
 	// insert the first number from pend
 	main_chain.insert(main_chain.begin(), new_pend[0]);
@@ -276,15 +278,44 @@ int main(int ac, char **av) {
 	for (int i = 1; i < ac; ++i)
 	{
 		try {
-			seq_vect.push_back(std::stoi(av[i]));
-			seq_list.push_back(std::stoi(av[i]));
+			seq_vect.emplace_back(std::stoi(av[i]));
+			seq_list.emplace_back(std::stoi(av[i]));
 		} catch (...) {
 			std::cerr << "ERR: invalid input\n";
 			return 1;
 		}
 	}
 
-	std::cout << "\nPmergeme Version 1.23423b\n\n";
+	std::cout << "Before: ";
+	for (int i = 1; i < ac; ++i)
+	{
+		if (i < ac - 1)
+			std::cout << av[i] << " ";
+		else if (i == ac - 1)
+			std::cout << av[i];
+	}
+	std::cout << '\n';
+
+    auto start = std::chrono::high_resolution_clock::now();
 	ford_johnson(seq_vect);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+    auto start_list = std::chrono::high_resolution_clock::now();
 	ford_johnson(seq_list);
+    auto end_list = std::chrono::high_resolution_clock::now();
+    auto duration_list = std::chrono::duration_cast<std::chrono::microseconds>(end_list - start_list);
+
+	std::cout << "After : ";
+	for (auto i : seq_vect)
+	{
+		if (i != seq_vect.back())
+			std::cout << i << " ";
+		else
+			std::cout << i;
+	}
+	std::cout << '\n';
+
+	std::cout << "Time to process a range of " << seq_vect.size() << " elements with std::vector " << ": " << duration.count() << " us" << '\n';
+	std::cout << "Time to process a range of " << seq_list.size() << " elements with std::list   " << ": " << duration_list.count() << " us" << '\n';
 }
