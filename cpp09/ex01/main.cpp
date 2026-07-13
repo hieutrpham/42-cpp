@@ -4,15 +4,18 @@ int main(int ac, char **av)
 {
 	if (ac != 2)
 	{
-		std::cerr << "Wrong arguments\n";
+		std::cerr << "Usage: " << av[0] << " [sequence of numbers to sort]\n";
 		return EXIT_FAILURE;
 	}
 
 	std::istringstream input(av[1]);
 	std::string token;
-	// std::stack<int, std::list<int>> Stack;
 	RPN Stack;
 
+	// BUG:
+	// * overflow 9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9
+	// * stoi parsing things like 12.34asdfkj. take a look at from_chars
+	// * also shouldn't allow numbers > 10
 	while(input >> token)
 	{
 		int num;
@@ -60,6 +63,9 @@ int main(int ac, char **av)
 			}
 		}
 	}
-	if (!Stack.empty())
+
+	if (!Stack.empty() && Stack.size() == 1)
 		std::cout << Stack.top() << "\n";
+	else
+		std::cerr << "Invalid input\n";
 }

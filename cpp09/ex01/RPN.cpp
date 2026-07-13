@@ -57,6 +57,11 @@ int RPN::top()
 	return m_stack.top();
 }
 
+int RPN::size()
+{
+	return m_stack.size();
+}
+
 bool RPN::empty()
 {
 	return m_stack.empty();

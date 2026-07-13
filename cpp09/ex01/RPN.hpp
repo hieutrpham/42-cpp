@@ -1,18 +1,11 @@
 #pragma once
-#include <cctype>
-#include <cstdio>
-#include <list>
-#include <cstdlib>
 #include <iostream>
 #include <sstream>
 #include <stack>
-#include <stdexcept>
-#include <string>
-#include <vector>
 
 class RPN {
 private:
-	std::stack<int, std::list<int>> m_stack;
+	std::stack<int> m_stack;
 
 public:
 	RPN();
@@ -24,4 +17,5 @@ public:
 	void push(int num);
 	bool empty();
 	int  top();
+	int  size();
 };
