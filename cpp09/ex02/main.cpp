@@ -3,7 +3,7 @@
 int main(int ac, char **av) {
 	if (ac < 3)
 	{
-		std::cout << "Usage: " << av[0] << " [sequence of numbers to sort]\n";
+		std::cerr << "Usage: " << av[0] << " [sequence of numbers to sort]\n";
 		return 1;
 	}
 	
