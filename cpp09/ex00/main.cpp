@@ -67,8 +67,9 @@ int main(int ac, char** av)
 			std::cout << "Error: too large a number.\n";
 			continue;
 		}
-		auto price = coinbase.get_data().lower_bound(date);
-		if (price == coinbase.get_data().end())
+		auto data = coinbase.get_data();
+		auto price = data.lower_bound(date);
+		if (price == data.end())
 		{
 			std::cout << "Error: bad input => " << date << "\n";
 			continue;
