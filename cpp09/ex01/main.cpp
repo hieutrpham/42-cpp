@@ -59,6 +59,7 @@ int main(int ac, char **av)
 				try {
 					Stack.push(Stack.handle_op('+'));
 				} catch (...) {
+					std::cerr << e.what() << ' ';
 					goto EXIT;
 				}
 			}
@@ -67,6 +68,7 @@ int main(int ac, char **av)
 				try {
 					Stack.push(Stack.handle_op('-'));
 				} catch (...) {
+					std::cerr << e.what() << ' ';
 					goto EXIT;
 				}
 			}
