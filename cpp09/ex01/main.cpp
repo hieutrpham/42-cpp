@@ -1,5 +1,10 @@
 #include "RPN.hpp"
 
+bool is_allow(char c)
+{
+	return c == '*' || c == '-' || c == '+' || c == '/';
+}
+
 int main(int ac, char **av)
 {
 	if (ac != 2)
@@ -12,15 +17,41 @@ int main(int ac, char **av)
 	std::string token;
 	RPN Stack;
 
-	// BUG:
-	// * overflow 9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9*9
-	// * stoi parsing things like 12.34asdfkj. take a look at from_chars
-	// * also shouldn't allow numbers > 10
 	while(input >> token)
 	{
 		int num;
+
+		// handle negative number
+		if (token[0] == '-')
+		{
+			for (size_t i = 1; i < token.size(); ++i)
+			{
+				if (!std::isdigit(token[i]))
+				{
+					std::cerr << "Invalid input (contained forbidden char)\n";
+					return EXIT_FAILURE;
+				}
+			}
+		}
+		else
+		{
+			for (size_t i = 0; i < token.size(); ++i)
+			{
+				if (!is_allow(token[i]) && !std::isdigit(token[i]))
+				{
+					std::cerr << "Invalid input (contained forbidden char)\n";
+					return EXIT_FAILURE;
+				}
+			}
+		}
+
 		try {
 			num = std::stoi(token.c_str());
+			if (num > 9)
+			{
+				std::cerr << "Invalid input (too big)\n";
+				return EXIT_FAILURE;
+			}
 			Stack.push(num);
 		} catch (std::exception &e) {
 			if (token == "+")
@@ -43,7 +74,8 @@ int main(int ac, char **av)
 			{
 				try {
 					Stack.push(Stack.handle_op('/'));
-				} catch (...) {
+				} catch (std::exception &e) {
+					std::cerr << e.what() << ' ';
 					goto EXIT;
 				}
 			}
@@ -51,7 +83,8 @@ int main(int ac, char **av)
 			{
 				try {
 					Stack.push(Stack.handle_op('*'));
-				} catch (...) {
+				} catch (std::exception &e) {
+					std::cerr << e.what() << ' ';
 					goto EXIT;
 				}
 			}

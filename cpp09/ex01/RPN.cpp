@@ -30,24 +30,38 @@ int RPN::handle_op(char op)
 
 	switch (op) {
 		case '+':
-			return remove_top() + remove_top();
+		{
+			auto a = remove_top();
+			auto b = remove_top();
+			if (a + 1LL + b > INT_MAX)
+				throw std::runtime_error("Overflow");
+			return a + b;
+		}
 		case '-':
 		{
-			auto num1 = remove_top();
-			auto num2 = remove_top();
-			return num2 - num1;
+			auto a = remove_top();
+			auto b = remove_top();
+			if (b - 1LL - a < INT_MIN)
+				throw std::runtime_error("Overflow");
+			return b - a;
 		}
 		case '/':
 		{
-			auto num1 = remove_top();
-			auto num2 = remove_top();
-			if (num1 != 0)
-				return num2 / num1;
+			auto a = remove_top();
+			auto b = remove_top();
+			if (a != 0)
+				return b / a;
 			else
-				return 0;
+				throw std::runtime_error("Division by 0");
 		}
 		case '*':
-			return remove_top() * remove_top();
+		{
+			auto a = remove_top();
+			auto b = remove_top();
+			if (a * 1LL * b > INT_MAX)
+				throw std::runtime_error("Overflow");
+			return a * b;
+		}
 		default: throw std::runtime_error("Invalid operator");
 	}
 }
