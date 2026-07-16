@@ -53,12 +53,12 @@ int main(int ac, char **av)
 				return EXIT_FAILURE;
 			}
 			Stack.push(num);
-		} catch (std::exception &e) {
+		} catch (...) {
 			if (token == "+")
 			{
 				try {
 					Stack.push(Stack.handle_op('+'));
-				} catch (...) {
+				} catch (std::exception &e) {
 					std::cerr << e.what() << ' ';
 					goto EXIT;
 				}
@@ -67,7 +67,7 @@ int main(int ac, char **av)
 			{
 				try {
 					Stack.push(Stack.handle_op('-'));
-				} catch (...) {
+				} catch (std::exception &e) {
 					std::cerr << e.what() << ' ';
 					goto EXIT;
 				}
