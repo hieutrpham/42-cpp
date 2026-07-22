@@ -2,6 +2,18 @@
 
 void str_trim(std::string &str);
 
+time_t get_time(int year, int mon, int day)
+{
+	std::tm date = {};
+
+	date.tm_year = year - 1900;
+	date.tm_mon = mon - 1;
+	date.tm_mday = day;
+	date.tm_isdst = -1;
+
+	return mktime(&date);
+}
+
 int main(int ac, char** av)
 {
 	if (ac != 2) {
@@ -44,29 +56,43 @@ int main(int ac, char** av)
 		str_trim(date);
 
 		std::stringstream date_stream(date);
-		std::chrono::year_month_day ymd;
 		
-		date_stream >> std::chrono::parse("%F", ymd);
+		std::tm tm = {};
+		date_stream >> std::get_time(&tm, "%Y-%m-%d");
+		auto original_mday = tm.tm_mday;
+		auto original_mon = tm.tm_mon;
 
-		if (date_stream.fail() || date_stream.eof() || !ymd.ok())
+		if (date_stream.fail())
 		{
 			std::cerr << "Error: bad input => " << date << "\n";
 			continue;
 		}
 
-		if (ymd < std::chrono::year_month_day{std::chrono::year{2009}, std::chrono::January, std::chrono::day{2}}) {
-			std::cerr << "Error: bad input => " << date << "\n";
+		time_t t = mktime(&tm);
+
+		if (t < 0 || tm.tm_mday != original_mday || tm.tm_mon != original_mon)
+		{
+			std::cerr << "Error: bad input invalid calendar logic => " << date << "\n";
+			continue;
+		}
+
+		auto min_date = get_time(2009, 1, 2);
+
+		if (difftime(t, min_date) < 0) {
+			// std::cout << t << ":" << min_date << '\n';
+			std::cerr << "Error: bad input too early => " << date << "\n";
 			continue;
 		}
 
 		auto data = coinbase.get_data();
-		auto price = data.lower_bound(date);
+		auto item = data.lower_bound(date);
 
 		iss >> value;
 
-		if (ymd > std::chrono::year_month_day{std::chrono::year{2022}, std::chrono::March, std::chrono::day{29}}) {
-			price = data.lower_bound("2022-03-29");
-			std::cout << date << " => " << value << " = " << value * price->second << "\n";
+		if (difftime(t, get_time(2022, 3, 29)) > 0)
+		{
+			item = data.lower_bound("2022-03-29");
+			std::cout << date << " => " << value << " = " << value * item->second << "\n";
 			continue;
 		}
 
@@ -82,15 +108,12 @@ int main(int ac, char** av)
 			continue;
 		}
 
-		// NOTE: give the last price point instead of error
-		if (price == data.end())
-		{
-			std::cerr << "Error: bad input => " << date << "\n";
-			continue;
-		}
-
 		if (iss.eof())
-			std::cout << date << " => " << value << " = " << value * price->second << "\n";
+		{
+			if ((*item).first != date)
+				item--;
+			std::cout << date << " => " << value << " = " << value * item->second << "\n";
+		}
 		else
 			std::cerr << "Error: bad format\n";
 	}

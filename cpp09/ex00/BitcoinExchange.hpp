@@ -8,6 +8,9 @@
 #include <string>
 #include <sstream>
 #include <chrono>
+#include <iomanip>
+#include <ctime>
+#include <iostream>
 
 class BitcoinExchange {
 private:
