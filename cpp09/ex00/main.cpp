@@ -1,6 +1,18 @@
 #include "BitcoinExchange.hpp"
 
-void str_trim(std::string &str);
+// Source - https://stackoverflow.com/a/217605
+void str_trim(std::string &str)
+{
+	// trim left
+	str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](unsigned char ch) {
+		return !std::isspace(ch);
+	}));
+
+	// trim right
+	str.erase(std::find_if(str.rbegin(), str.rend(), [](unsigned char ch) {
+		return !std::isspace(ch);
+	}).base(), str.end());
+}
 
 time_t get_time(int year, int mon, int day)
 {
@@ -11,7 +23,7 @@ time_t get_time(int year, int mon, int day)
 	date.tm_mday = day;
 	date.tm_isdst = -1;
 
-	return mktime(&date);
+	return std::mktime(&date);
 }
 
 int main(int ac, char** av)
@@ -68,7 +80,7 @@ int main(int ac, char** av)
 			continue;
 		}
 
-		time_t t = mktime(&tm);
+		time_t t = std::mktime(&tm);
 
 		if (t < 0 || tm.tm_mday != original_mday || tm.tm_mon != original_mon)
 		{
@@ -76,10 +88,7 @@ int main(int ac, char** av)
 			continue;
 		}
 
-		auto min_date = get_time(2009, 1, 2);
-
-		if (difftime(t, min_date) < 0) {
-			// std::cout << t << ":" << min_date << '\n';
+		if (difftime(t, get_time(2009, 1, 2)) < 0) {
 			std::cerr << "Error: bad input too early => " << date << "\n";
 			continue;
 		}
@@ -88,13 +97,6 @@ int main(int ac, char** av)
 		auto item = data.lower_bound(date);
 
 		iss >> value;
-
-		if (difftime(t, get_time(2022, 3, 29)) > 0)
-		{
-			item = data.lower_bound("2022-03-29");
-			std::cout << date << " => " << value << " = " << value * item->second << "\n";
-			continue;
-		}
 
 		if (value < 0)
 		{
@@ -113,22 +115,12 @@ int main(int ac, char** av)
 			if ((*item).first != date)
 				item--;
 			std::cout << date << " => " << value << " = " << value * item->second << "\n";
+			continue;
 		}
 		else
+		{
 			std::cerr << "Error: bad format\n";
+			continue;
+		}
 	}
-}
-
-// Source - https://stackoverflow.com/a/217605
-void str_trim(std::string &str)
-{
-	// trim left
-	str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](unsigned char ch) {
-		return !std::isspace(ch);
-	}));
-
-	// trim right
-	str.erase(std::find_if(str.rbegin(), str.rend(), [](unsigned char ch) {
-		return !std::isspace(ch);
-	}).base(), str.end());
 }
